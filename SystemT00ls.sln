@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemT00ls", "SystemT00ls\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemT00ls.CoreFunctions", "SystemT00ls.CoreFunctions\SystemT00ls.CoreFunctions.csproj", "{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyConsole", "EasyConsole\EasyConsole\EasyConsole.csproj", "{DA79BA94-FAD6-462F-89C7-774FE822D594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyConsole.Core", "EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj", "{B2B71709-A7D2-486C-9D99-97297C3D26C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA79BA94-FAD6-462F-89C7-774FE822D594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA79BA94-FAD6-462F-89C7-774FE822D594}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA79BA94-FAD6-462F-89C7-774FE822D594}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA79BA94-FAD6-462F-89C7-774FE822D594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

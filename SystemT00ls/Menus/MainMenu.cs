@@ -12,7 +12,7 @@ namespace SystemT00ls.Menus
         public MainMenu(Program program)
             : base("SystemT00ls Main Menu", program,
                   new Option("Active Directory Tools", () => program.NavigateTo<ActiveDirectoryMenu>()),
-                  new Option("Quit Application", () => program.NavigateHome()))
+                  new Option("Quit Application", () => Environment.Exit(0)))
         { }
 
         #endregion Public Constructors
