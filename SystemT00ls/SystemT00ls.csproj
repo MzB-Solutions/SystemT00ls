@@ -1,17 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject></StartupObject>
+    <StartupObject>SystemT00ls.Runner</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyConsole" Version="1.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\EasyConsole\EasyConsole\EasyConsole.csproj" />
     <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreFunctions.csproj" />
   </ItemGroup>
-
 </Project>
