@@ -1,9 +1,9 @@
-﻿using System;
+﻿using EasyConsole;
+using System;
 using System.Threading;
+using SystemT00ls.Menus;
 using static SystemT00ls.FunctionsType;
 using static SystemT00ls.OurCursor;
-using SystemT00ls.Menus;
-using EasyConsole;
 
 namespace SystemT00ls
 {
@@ -165,6 +165,8 @@ namespace SystemT00ls
         {
             AddPage(new MainMenu(this));
             AddPage(new ActiveDirectoryMenu(this));
+            AddPage(new DockerMenu(this));
+            AddPage(new ComputerMenu(this));
             SetPage<MainMenu>();
         }
 

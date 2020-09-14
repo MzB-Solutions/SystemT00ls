@@ -31,7 +31,7 @@ namespace SystemT00ls.CoreFunctions
 
         #region Private Methods
 
-        private void DoExitWin(int flg)
+        private static void DoExitWin(int flg)
         {
             TokPriv1Luid tp;
             IntPtr hproc = GetCurrentProcess();
@@ -68,7 +68,7 @@ namespace SystemT00ls.CoreFunctions
 
         #region Public Methods
 
-        public void RestartComputer()
+        public static void RestartComputer()
         {
             DoExitWin(EWX_REBOOT);
         }

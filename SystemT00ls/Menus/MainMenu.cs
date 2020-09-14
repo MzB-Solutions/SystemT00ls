@@ -1,7 +1,5 @@
 ﻿using EasyConsole;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SystemT00ls.Menus
 {
@@ -10,8 +8,10 @@ namespace SystemT00ls.Menus
         #region Public Constructors
 
         public MainMenu(Program program)
-            : base("SystemT00ls Main Menu", program,
-                  new Option("Active Directory Tools", () => program.NavigateTo<ActiveDirectoryMenu>()),
+            : base("SystemT00ls", program,
+                  new Option("Active Directory", () => program.NavigateTo<ActiveDirectoryMenu>()),
+                  new Option("Docker4Windows", () => program.NavigateTo<DockerMenu>()),
+                  new Option("Computer Behaviour", () => program.NavigateTo<ComputerMenu>()),
                   new Option("Quit Application", () => Environment.Exit(0)))
         { }
 

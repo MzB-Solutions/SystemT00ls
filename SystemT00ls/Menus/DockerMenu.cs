@@ -2,12 +2,12 @@
 
 namespace SystemT00ls.Menus
 {
-    internal class ActiveDirectoryMenu : Page
+    internal class DockerMenu : Page
     {
         #region Public Constructors
 
-        public ActiveDirectoryMenu(Program program)
-            : base("Active Directory Tools", program)
+        public DockerMenu(Program program)
+            : base("Docker Tools", program)
         {
         }
 
