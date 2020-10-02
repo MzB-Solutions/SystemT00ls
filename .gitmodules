@@ -1,0 +1,3 @@
+[submodule "EasyConsole.Core"]
+	path = EasyConsole.Core
+	url = git@github.com:MzB-Solutions/EasyConsole.Core.git
