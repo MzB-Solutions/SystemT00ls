@@ -34,7 +34,7 @@ namespace SystemT00ls.CoreFunctions
 
         #region Private Methods
 
-        private static void DoExitWin(int flg)
+        private static void _doExitWin(int _flg)
         {
             TokPriv1Luid tp;
             IntPtr hproc = GetCurrentProcess();
@@ -45,7 +45,7 @@ namespace SystemT00ls.CoreFunctions
             tp.Attr = SE_PRIVILEGE_ENABLED;
             _ = LookupPrivilegeValue(null, SE_SHUTDOWN_NAME, ref tp.Luid);
             _ = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
-            _ = ExitWindowsEx(flg, 0);
+            _ = ExitWindowsEx(_flg, 0);
         }
 
         #endregion Private Methods
@@ -76,7 +76,7 @@ namespace SystemT00ls.CoreFunctions
         /// </summary>
         public static void LogoffUser()
         {
-            DoExitWin(EWX_LOGOFF);
+            _doExitWin(EWX_LOGOFF);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace SystemT00ls.CoreFunctions
         /// </summary>
         public static void RestartComputer()
         {
-            DoExitWin(EWX_REBOOT);
+            _doExitWin(EWX_REBOOT);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace SystemT00ls.CoreFunctions
         /// </summary>
         public static void ShutdownComputer()
         {
-            DoExitWin(EWX_POWEROFF);
+            _doExitWin(EWX_POWEROFF);
         }
 
         #endregion Public Methods

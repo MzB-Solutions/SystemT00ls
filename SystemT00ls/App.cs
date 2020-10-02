@@ -30,12 +30,13 @@ namespace SystemT00ls
         /// A public wrapper for the _notice() function
         /// </summary>
         /// <param name="Text">What text to display as a notice</param>
-        /// <param name="length">Length of seconds to wait before we return control</param>
+        /// <param name="length">Length of seconds to wait before we return control (Any positive non-null integer)</param>
         /// <param name="cleanMe">Do we cleanup our own message? (Default: true)</param>
-        /// <param name="color">This is essentially an enum of warning levels, converted to a <seealso cref="ConsoleColor"/></param>
-        public static void DoNotice(string Text, int length, bool cleanMe = true, NoticeType color = NoticeType.Error)
+        /// <param name="color">This is essentially an enum of warning levels, converted to a <seealso cref="ConsoleColor"/> (Default: NoticeType.Error => Red)</param>
+        /// <param name="bgcolor">Any valid <see cref="ConsoleColor"/> (Default: ConsoleColor.Black)</param>
+        public static void DoNotice(string Text, byte length, bool cleanMe = true, NoticeType color = NoticeType.Error, ConsoleColor bgcolor = ConsoleColor.Black)
         {
-            _ = new Notice(Text, length, cleanMe, color);
+            _ = new Notice(Text, cleanMe, color, length, bgcolor);
         }
 
         #endregion Public Methods
