@@ -3,12 +3,12 @@ using System.Runtime.InteropServices;
 
 namespace SystemT00ls.CoreFunctions
 {
-    /// <summary>
-    /// A win32-api compatible reboot straight off of SO
-    /// </summary>
+    /// <summary>A win32-api compatible reboot straight off of SO</summary>
     public class Reboot
     {
         #region Internal Fields
+
+        internal const byte DEF_TIMEOUT = 0;
 
         internal const int EWX_FORCE = 0x00000004;
 
@@ -34,7 +34,7 @@ namespace SystemT00ls.CoreFunctions
 
         #region Private Methods
 
-        private static void _doExitWin(int _flg)
+        private static void _doExitWin(int _flg, byte _timeout = 0)
         {
             TokPriv1Luid tp;
             IntPtr hproc = GetCurrentProcess();
@@ -44,7 +44,7 @@ namespace SystemT00ls.CoreFunctions
             tp.Luid = 0;
             tp.Attr = SE_PRIVILEGE_ENABLED;
             _ = LookupPrivilegeValue(null, SE_SHUTDOWN_NAME, ref tp.Luid);
-            _ = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
+            _ = AdjustTokenPrivileges(htok, false, ref tp, CoreFunctions.IntTools.Clamp(_timeout, 1, 60), IntPtr.Zero, IntPtr.Zero);
             _ = ExitWindowsEx(_flg, 0);
         }
 
@@ -71,28 +71,31 @@ namespace SystemT00ls.CoreFunctions
 
         #region Public Methods
 
-        /// <summary>
-        /// Simply logoff the user
-        /// </summary>
-        public static void LogoffUser()
+        /// <summary>Simply logoff the user</summary>
+        /// <param name="timeout">
+        /// a byte value containing a 0-127 second value before we action the logoff
+        /// </param>
+        public static void LogoffUser(byte timeout = DEF_TIMEOUT)
         {
-            _doExitWin(EWX_LOGOFF);
+            _doExitWin(EWX_LOGOFF, timeout);
         }
 
-        /// <summary>
-        /// Restart the whole machine
-        /// </summary>
-        public static void RestartComputer()
+        /// <summary>Restart the whole machine</summary>
+        /// <param name="timeout">
+        /// a byte value containing a 0-127 second value before we action the restart
+        /// </param>
+        public static void RestartComputer(byte timeout = DEF_TIMEOUT)
         {
-            _doExitWin(EWX_REBOOT);
+            _doExitWin(EWX_REBOOT, timeout);
         }
 
-        /// <summary>
-        /// Poweroff (shutdown) the machine
-        /// </summary>
-        public static void ShutdownComputer()
+        /// <summary>Poweroff (shutdown) the machine</summary>
+        /// <param name="timeout">
+        /// a byte value containing a 0-127 second value before we action the poweroff
+        /// </param>
+        public static void ShutdownComputer(byte timeout = DEF_TIMEOUT)
         {
-            _doExitWin(EWX_POWEROFF);
+            _doExitWin(EWX_POWEROFF, timeout);
         }
 
         #endregion Public Methods
@@ -100,9 +103,7 @@ namespace SystemT00ls.CoreFunctions
         #region Internal Structs
 
         //with api
-        /// <summary>
-        /// This is directly taken from https://social.msdn.microsoft.com/Forums/vstudio/en-US/8a8bbd4b-9a80-4785-afc7-1e8e6daa3d42/force-restart-using-c-and-windows-api?forum=netfxbcl
-        /// </summary>
+        /// <summary>This is directly taken from https://social.msdn.microsoft.com/Forums/vstudio/en-US/8a8bbd4b-9a80-4785-afc7-1e8e6daa3d42/force-restart-using-c-and-windows-api?forum=netfxbcl</summary>
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         internal struct TokPriv1Luid { public int Count; public long Luid; public int Attr; }
 
