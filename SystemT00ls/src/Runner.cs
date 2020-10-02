@@ -6,7 +6,7 @@
 
         private static void Main(string[] args)
         {
-            new SystemT00ls.App().Run();
+            new App().Run();
         }
 
         #endregion Private Methods

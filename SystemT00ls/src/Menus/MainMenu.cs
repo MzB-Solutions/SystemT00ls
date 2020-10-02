@@ -16,5 +16,15 @@ namespace SystemT00ls.Menus
         { }
 
         #endregion Public Constructors
+
+        #region Public Methods
+
+        public override void Display()
+        {
+            App.DoNotice("This is beta-software!", 0, false, Notice.NoticeType.Warning);
+            base.Display();
+        }
+
+        #endregion Public Methods
     }
 }

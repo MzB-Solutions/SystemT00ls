@@ -17,6 +17,7 @@ namespace SystemT00ls.Menus
 
         public override void Display()
         {
+            App.DoNotice("Under construction", 1, false, Notice.NoticeType.Message);
             base.Display();
             Output.WriteLine("List some tools here");
             Input.ReadString("Press [ENTER] to return to main menu");

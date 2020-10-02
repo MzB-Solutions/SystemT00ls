@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemT00ls.CoreFunctions",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyConsole.Core", "EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj", "{B2B71709-A7D2-486C-9D99-97297C3D26C1}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SystemToolsInstaller", "SystemToolsInstaller\SystemToolsInstaller.vdproj", "{ACB45032-EAE3-4746-A864-706462EE7EEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB45032-EAE3-4746-A864-706462EE7EEC}.Debug|Any CPU.ActiveCfg = Debug
+		{ACB45032-EAE3-4746-A864-706462EE7EEC}.Debug|Any CPU.Build.0 = Debug
+		{ACB45032-EAE3-4746-A864-706462EE7EEC}.Release|Any CPU.ActiveCfg = Release
+		{ACB45032-EAE3-4746-A864-706462EE7EEC}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

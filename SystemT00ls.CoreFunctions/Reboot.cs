@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace SystemT00ls.CoreFunctions
 {
+    /// <summary>
+    /// A win32-api compatible reboot straight off of SO
+    /// </summary>
     public class Reboot
     {
         #region Internal Fields
@@ -68,9 +71,28 @@ namespace SystemT00ls.CoreFunctions
 
         #region Public Methods
 
+        /// <summary>
+        /// Simply logoff the user
+        /// </summary>
+        public static void LogoffUser()
+        {
+            DoExitWin(EWX_LOGOFF);
+        }
+
+        /// <summary>
+        /// Restart the whole machine
+        /// </summary>
         public static void RestartComputer()
         {
             DoExitWin(EWX_REBOOT);
+        }
+
+        /// <summary>
+        /// Poweroff (shutdown) the machine
+        /// </summary>
+        public static void ShutdownComputer()
+        {
+            DoExitWin(EWX_POWEROFF);
         }
 
         #endregion Public Methods
