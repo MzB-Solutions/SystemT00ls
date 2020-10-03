@@ -21,7 +21,7 @@ namespace SystemT00ls.Menus
 
         public override void Display()
         {
-            App.DoNotice("This is beta-software!", 0, false, Notice.NoticeType.Warning);
+            App.DoNotice("This is beta-software!", 0, false, Notice.NoticeType.Warning, ConsoleColor.DarkBlue);
             base.Display();
         }
 

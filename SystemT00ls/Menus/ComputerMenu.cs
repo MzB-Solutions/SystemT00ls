@@ -9,9 +9,10 @@ namespace SystemT00ls.Menus
 
         public ComputerMenu(Program program)
             : base("Computer Behaviour", program,
-                  new Option("Reboot in 10 Seconds", () => Reboot.RestartComputer()),
-                  new Option("Shutdown and poweroff the Computer", () => Reboot.ShutdownComputer()),
-                  new Option("Logoff User", () => Reboot.LogoffUser())
+                  new Option("Reboot", () => PowerControl.ExitWindows(RestartOptions.Reboot, true)),
+                  new Option("Poweroff", () => PowerControl.ExitWindows(RestartOptions.PowerOff, true)),
+                  new Option("Suspend", () => PowerControl.ExitWindows(RestartOptions.Suspend, true)),
+                  new Option("Logoff", () => PowerControl.ExitWindows(RestartOptions.LogOff, true))
                        )
         {
         }
