@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SystemT00ls.CoreFunctions
+namespace SystemT00ls.CoreFunctions.PowerControl
 {
     /// <summary>
     /// An LUID is a 64-bit value guaranteed to be unique only on the system on which it was
@@ -84,7 +84,7 @@ namespace SystemT00ls.CoreFunctions
     }
 
     /// <summary>Implements methods to exit Windows.</summary>
-    public class PowerControl
+    public sealed class ExecuteControl
     {
         #region Private Fields
 

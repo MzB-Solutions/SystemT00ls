@@ -1,5 +1,5 @@
 ﻿using EasyConsole;
-using SystemT00ls.CoreFunctions;
+using SystemT00ls.CoreFunctions.PowerControl;
 
 namespace SystemT00ls.Menus
 {
@@ -9,10 +9,10 @@ namespace SystemT00ls.Menus
 
         public ComputerMenu(Program program)
             : base("Computer Behaviour", program,
-                  new Option("Reboot", () => PowerControl.ExitWindows(RestartOptions.Reboot, true)),
-                  new Option("Poweroff", () => PowerControl.ExitWindows(RestartOptions.PowerOff, true)),
-                  new Option("Suspend", () => PowerControl.ExitWindows(RestartOptions.Suspend, true)),
-                  new Option("Logoff", () => PowerControl.ExitWindows(RestartOptions.LogOff, true))
+                  new Option("Reboot", () => ExecuteControl.ExitWindows(RestartOptions.Reboot, true)),
+                  new Option("Poweroff", () => ExecuteControl.ExitWindows(RestartOptions.PowerOff, true)),
+                  new Option("Suspend", () => ExecuteControl.ExitWindows(RestartOptions.Suspend, true)),
+                  new Option("Logoff", () => ExecuteControl.ExitWindows(RestartOptions.LogOff, true))
                        )
         {
         }

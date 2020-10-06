@@ -1,6 +1,7 @@
 ﻿using EasyConsole;
 using System;
 using System.Threading;
+using SystemT00ls.CoreFunctions;
 using static SystemT00ls.OurCursor;
 
 namespace SystemT00ls
@@ -114,7 +115,7 @@ namespace SystemT00ls
             {
                 // just making sure we're not passing in 0 as a value since then, there aint no
                 // message lulz
-                _length = CoreFunctions.IntTools.Clamp(_length, 1, 30);
+                _length = IntTools.Clamp(_length, 1, 30);
                 // then sleep for _length seconds
                 Thread.Sleep(TimeSpan.FromSeconds(_length));
                 // again,reset our position to the start of the message
