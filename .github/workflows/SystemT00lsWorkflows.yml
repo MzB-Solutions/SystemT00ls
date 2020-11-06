@@ -1,11 +1,9 @@
-name: .NET Core
-
+name: .NET Core build
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
 jobs:
   build-windows64:
     runs-on: windows-latest
@@ -45,3 +43,21 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+
+name: SandcastleHelpFileBuilder
+on:
+  push:
+    branches: [ docs ]
+  pull_request:
+    branches: [ docs ]
+jobs:
+  build-docs:
+    runs-on: [self-hosted,shfb]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Documentation --no-restore

@@ -45,7 +45,7 @@
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <HelpTitle>SystemT00ls Documentation :: by MzB Solutions</HelpTitle>
-    <HelpFileVersion>20.11.1.0</HelpFileVersion>
+    <HelpFileVersion>20.11.86</HelpFileVersion>
     <NamingMethod>HashedMemberName</NamingMethod>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <RootNamespaceContainer>True</RootNamespaceContainer>
@@ -200,5 +200,8 @@ How is data represented and exposed to the UI?</NamespaceSummaryItem>
     <PostBuildEvent>
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Documentation' ">
+    <OutputPath>bin\Documentation\</OutputPath>
   </PropertyGroup>
 </Project>
