@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.gitmodules = .gitmodules
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -43,7 +44,6 @@ Global
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2F970C9-B508-432F-8AAD-E238F8AC2F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2F970C9-B508-432F-8AAD-E238F8AC2F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2F970C9-B508-432F-8AAD-E238F8AC2F77}.Release|Any CPU.Build.0 = Release|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Release|Any CPU.ActiveCfg = Release|Any CPU
