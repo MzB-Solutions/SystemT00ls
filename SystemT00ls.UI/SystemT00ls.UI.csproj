@@ -3,6 +3,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>SystemT00ls.UI.Program</StartupObject>
+    <Version>20.11.86</Version>
+    <FileVersion>20.11.86</FileVersion>
+    <AssemblyVersion>20.11.86</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.UI\SystemT00ls.UI.xml</DocumentationFile>
@@ -21,6 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreLib.csproj" />
+    <ProjectReference Include="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
 </Project>

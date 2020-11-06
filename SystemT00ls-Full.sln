@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemT00ls.CoreLib", "SystemT00ls.CoreFunctions\SystemT00ls.CoreLib.csproj", "{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemT00ls.CoreLib", "SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj", "{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyConsole.Core", "EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj", "{B2B71709-A7D2-486C-9D99-97297C3D26C1}"
 EndProject
@@ -59,6 +59,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {962F6BD8-DE44-4D9A-9F85-4B9408049B3B}
 	EndGlobalSection
 EndGlobal

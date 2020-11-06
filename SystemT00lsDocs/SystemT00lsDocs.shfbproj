@@ -27,13 +27,13 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreFunctions.csproj" />
-      <DocumentationSource sourceFile="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreFunctions.xml" />
       <DocumentationSource sourceFile="..\SystemT00ls.cli\SystemT00ls.cli.csproj" />
       <DocumentationSource sourceFile="..\SystemT00ls.cli\SystemT00ls.xml" />
       <DocumentationSource sourceFile="..\SystemT00ls.UI\SystemT00ls.UI.csproj" />
       <DocumentationSource sourceFile="..\SystemT00ls.UI\SystemT00ls.UI.xml" />
       <DocumentationSource sourceFile="..\EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj" />
+      <DocumentationSource sourceFile="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj" />
+      <DocumentationSource sourceFile="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.xml" />
     </DocumentationSources>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <SyntaxFilters>C#, XAML Usage</SyntaxFilters>
@@ -179,7 +179,7 @@ How is data represented and exposed to the UI?</NamespaceSummaryItem>
       <Project>{681117c2-a5b5-42ac-ad0b-25e0f64b318b}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreLib.csproj">
+    <ProjectReference Include="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj">
       <Name>SystemT00ls.CoreLib</Name>
       <Project>{dab5d5ef-cbca-41a0-96da-a12c10d78e43}</Project>
       <Private>True</Private>
