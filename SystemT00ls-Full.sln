@@ -11,10 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.gitmodules = .gitmodules
-		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
+		.github\workflows\dotnet-core.yaml = .github\workflows\dotnet-core.yaml
 		LICENSE = LICENSE
 		README.md = README.md
-		.github\workflows\shfb.yml = .github\workflows\shfb.yml
+		.github\workflows\shfb.yaml = .github\workflows\shfb.yaml
 	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "SystemT00lsDocs", "SystemT00lsDocs\SystemT00lsDocs.shfbproj", "{F2F970C9-B508-432F-8AAD-E238F8AC2F77}"
