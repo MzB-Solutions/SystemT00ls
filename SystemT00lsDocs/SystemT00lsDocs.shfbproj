@@ -27,12 +27,8 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\SystemT00ls.cli\SystemT00ls.cli.csproj" />
       <DocumentationSource sourceFile="..\SystemT00ls.cli\SystemT00ls.xml" />
-      <DocumentationSource sourceFile="..\SystemT00ls.UI\SystemT00ls.UI.csproj" />
       <DocumentationSource sourceFile="..\SystemT00ls.UI\SystemT00ls.UI.xml" />
-      <DocumentationSource sourceFile="..\EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj" />
-      <DocumentationSource sourceFile="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj" />
       <DocumentationSource sourceFile="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.xml" />
     </DocumentationSources>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
