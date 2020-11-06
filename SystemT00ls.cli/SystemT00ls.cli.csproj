@@ -5,6 +5,9 @@
     <StartupObject>SystemT00ls.cli.Runner</StartupObject>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <ApplicationIcon>avalonia-logo.ico</ApplicationIcon>
+    <Version>20.11.86</Version>
+    <FileVersion>20.11.86</FileVersion>
+    <AssemblyVersion>20.11.86</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -44,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj" />
-    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreLib.csproj" />
+    <ProjectReference Include="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
@@ -54,4 +57,5 @@
   <Target Name="AfterCompile">
     <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&quot;$(ProjectDir)_ConfuserEx\Confuser.CLI.exe&quot; &quot;$(ProjectDir)_ConfuserEx\c.crproj&quot;)&#xD;&#xA;" />
   </Target>
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
 </Project>

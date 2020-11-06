@@ -4,6 +4,10 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <AssemblyName>SystemT00ls.CoreLib</AssemblyName>
     <RootNamespace>SystemT00ls.CoreLib</RootNamespace>
+    <ApplicationIcon></ApplicationIcon>
+    <Version>20.11.86</Version>
+    <FileVersion>20.11.86</FileVersion>
+    <AssemblyVersion>20.11.86</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.CoreLib\SystemT00ls.CoreLib.xml</DocumentationFile>
@@ -38,7 +42,13 @@
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.7.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\STlogo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Target Name="AfterCompile">
     <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&quot;$(ProjectDir)_ConfuserEx\Confuser.CLI.exe&quot; &quot;$(ProjectDir)_ConfuserEx\c.crproj&quot;)&#xD;&#xA;" />
   </Target>
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
 </Project>
