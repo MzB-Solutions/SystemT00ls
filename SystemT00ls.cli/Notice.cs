@@ -2,47 +2,38 @@
 using System;
 using System.Threading;
 using SystemT00ls.CoreFunctions;
-using static SystemT00ls.OurCursor;
+using static SystemT00ls.cli.OurCursor;
 
-namespace SystemT00ls
+namespace SystemT00ls.cli
 {
-    /// <summary>This generates a notice (upon construction) the displays 2 lines from the bottom</summary>
+    /// <summary>
+    /// This generates a notice (upon construction) the displays 2 lines from the bottom
+    /// </summary>
     internal class Notice
     {
         #region Private Fields
 
-        /// <summary>the initial X offset of the notice-cursor</summary>
-        private readonly int _offsetX = -5;
-
-        /// <summary>the initial Y offset for the notice-cursor</summary>
-        private readonly int _offsetY = -2;
-
-        #endregion Private Fields
-
-        #region Public Enums
-
-        /// <summary>A simple list of colours by severity of message-type</summary>
-        /// <remarks>
-        /// Info = White <br /> Warning = Yellow <br /> Message = Green <br /> Error = Red <br />
-        /// </remarks>
-        public enum NoticeType
-        {
-            Info = ConsoleColor.White,
-            Warning = ConsoleColor.Yellow,
-            Error = ConsoleColor.Red,
-            Message = ConsoleColor.Green
-        }
-
-        #endregion Public Enums
-
-
-        #region Private Fields
-
-        /// <summary>a struct of 2 ints for X and Y position of the (current) cursor</summary>
+        /// <summary>
+        /// a struct of 2 ints for X and Y position of the (current) cursor
+        /// </summary>
         private static Position _currentCursorPosition;
 
-        /// <summary>a struct of 2 ints for X and Y positions of the temp/notice cursor</summary>
+        /// <summary>
+        /// a struct of 2 ints for X and Y positions of the temp/notice cursor
+        /// </summary>
         private static Position _tempCursorPosition;
+
+        /// <summary>
+        /// the initial X offset of the notice-cursor
+        /// </summary>
+        /// <remarks>DEFAULT: -5</remarks>
+        private readonly int _offsetX = -5;
+
+        /// <summary>
+        /// the initial Y offset for the notice-cursor
+        /// </summary>
+        /// <remarks>DEFAULT: -2</remarks>
+        private readonly int _offsetY = -2;
 
         #endregion Private Fields
 
@@ -53,20 +44,30 @@ namespace SystemT00ls
             Console.SetCursorPosition(_tempCursorPosition.X, _tempCursorPosition.Y);
         }
 
-        /// <summary>Simply restore the cursor position from the private var _currentCursorPosition</summary>
+        /// <summary>
+        /// Simply restore the cursor position from the private var _currentCursorPosition
+        /// </summary>
         private static void _restorePosition()
         {
             Console.SetCursorPosition(_currentCursorPosition.X, _currentCursorPosition.Y);
         }
 
-        /// <summary>save the current console position into _currentCursorPositon</summary>
+        /// <summary>
+        /// save the current console position into _currentCursorPositon
+        /// </summary>
         private static void _savePosition()
         {
             _currentCursorPosition.X = Console.CursorLeft;
             _currentCursorPosition.Y = Console.CursorTop;
         }
 
-        /// <summary>Display a notice, somewhere near the bottom in red</summary>
+        #endregion Private Methods
+
+        #region Public Constructors
+
+        /// <summary>
+        /// Display a notice, somewhere near the bottom in red
+        /// </summary>
         /// <param name="_noticeText">A string containing the message to display</param>
         /// <param name="_cleanMe">
         /// Are we cleaning up after ourselves (true) or do we put a message at the bottom and leave
@@ -127,6 +128,24 @@ namespace SystemT00ls
             _restorePosition();
         }
 
-        #endregion Private Methods
+        #endregion Public Constructors
+
+        #region Public Enums
+
+        /// <summary>
+        /// A simple list of colours by severity of message-type
+        /// </summary>
+        /// <remarks>
+        /// Info = White <br /> Warning = Yellow <br /> Message = Green <br /> Error = Red <br />
+        /// </remarks>
+        public enum NoticeType
+        {
+            Info = ConsoleColor.White,
+            Warning = ConsoleColor.Yellow,
+            Error = ConsoleColor.Red,
+            Message = ConsoleColor.Green
+        }
+
+        #endregion Public Enums
     }
 }

@@ -13,10 +13,14 @@ namespace SystemT00ls.CoreFunctions.PowerControl
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct LUID
     {
-        /// <summary>The low order part of the 64 bit value.</summary>
+        /// <summary>
+        /// The low order part of the 64 bit value.
+        /// </summary>
         public int LowPart;
 
-        /// <summary>The high order part of the 64 bit value.</summary>
+        /// <summary>
+        /// The high order part of the 64 bit value.
+        /// </summary>
         public int HighPart;
     }
 
@@ -26,7 +30,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct LUID_AND_ATTRIBUTES
     {
-        /// <summary>Specifies an LUID value.</summary>
+        /// <summary>
+        /// Specifies an LUID value.
+        /// </summary>
         public LUID pLuid;
 
         /// <summary>
@@ -42,7 +48,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct TOKEN_PRIVILEGES
     {
-        /// <summary>Specifies the number of entries in the Privileges array.</summary>
+        /// <summary>
+        /// Specifies the number of entries in the Privileges array.
+        /// </summary>
         public int PrivilegeCount;
 
         /// <summary>
@@ -52,7 +60,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         public LUID_AND_ATTRIBUTES Privileges;
     }
 
-    /// <summary>Specifies the type of restart options that an application can use.</summary>
+    /// <summary>
+    /// Specifies the type of restart options that an application can use.
+    /// </summary>
     public enum RestartOptions
     {
         /// <summary>
@@ -66,7 +76,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         /// </summary>
         PowerOff = 8,
 
-        /// <summary>Shuts down the system and then restarts the system.</summary>
+        /// <summary>
+        /// Shuts down the system and then restarts the system.
+        /// </summary>
         Reboot = 2,
 
         /// <summary>
@@ -76,15 +88,21 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         /// </summary>
         ShutDown = 1,
 
-        /// <summary>Suspends the system.</summary>
+        /// <summary>
+        /// Suspends the system.
+        /// </summary>
         Suspend = -1,
 
-        /// <summary>Hibernates the system.</summary>
+        /// <summary>
+        /// Hibernates the system.
+        /// </summary>
         Hibernate = -2,
     }
 
-    /// <summary>Implements methods to exit Windows.</summary>
-    public sealed class ExecuteControl
+    /// <summary>
+    /// Implements methods to exit Windows.
+    /// </summary>
+    public class ExecuteControl
     {
         #region Private Fields
 
@@ -101,16 +119,23 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         /// </summary>
         private const int _fORMAT_MESSAGE_FROM_SYSTEM = 0x1000;
 
-        /// <summary>The privilege is enabled.</summary>
+        /// <summary>
+        /// The privilege is enabled.
+        /// </summary>
         private const int _sE_PRIVILEGE_ENABLED = 0x2;
 
-        /// <summary>Required to enable or disable the privileges in an access token.</summary>
+        /// <summary>
+        /// Required to enable or disable the privileges in an access token.
+        /// </summary>
         private const int _tOKEN_ADJUST_PRIVILEGES = 0x20;
 
-        /// <summary>Required to query an access token.</summary>
+        /// <summary>
+        /// Required to query an access token.
+        /// </summary>
         private const int _tOKEN_QUERY = 0x8;
 
         #endregion Private Fields
+
         #region Private Methods
 
         /// <summary>
@@ -302,7 +327,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         [DllImport("advapi32.dll", EntryPoint = "LookupPrivilegeValueA", CharSet = CharSet.Ansi)]
         private static extern int _lookupPrivilegeValue(string _lpSystemName, string _lpName, ref LUID _lpLuid);
 
-        /// <summary>The OpenProcessToken function opens the access token associated with a process.</summary>
+        /// <summary>
+        /// The OpenProcessToken function opens the access token associated with a process.
+        /// </summary>
         /// <param name="_processHandle">Handle to the process whose access token is opened.</param>
         /// <param name="_desiredAccess">
         /// Specifies an access mask that specifies the requested types of access to the access
@@ -347,9 +374,12 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         private static extern int _setSuspendState(int _hibernate, int _forceCritical, int _disableWakeEvent);
 
         #endregion Private Methods
+
         #region Protected Methods
 
-        /// <summary>Checks whether a specified method exists on the local computer.</summary>
+        /// <summary>
+        /// Checks whether a specified method exists on the local computer.
+        /// </summary>
         /// <param name="library">The library that holds the method.</param>
         /// <param name="method">The entry point of the requested method.</param>
         /// <returns>True if the specified method is present, false otherwise.</returns>
@@ -368,7 +398,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
             return false;
         }
 
-        /// <summary>Tries to enable the specified privilege.</summary>
+        /// <summary>
+        /// Tries to enable the specified privilege.
+        /// </summary>
         /// <param name="privilege">The privilege to enable.</param>
         /// <exception cref="PrivilegeException">
         /// There was an error while requesting a required privilege.
@@ -393,7 +425,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
                 throw new PrivilegeException(FormatError(Marshal.GetLastWin32Error()));
         }
 
-        /// <summary>Exits windows (and tries to enable any required access rights, if necesarry).</summary>
+        /// <summary>
+        /// Exits windows (and tries to enable any required access rights, if necesarry).
+        /// </summary>
         /// <param name="how">One of the RestartOptions values that specifies how to exit windows.</param>
         /// <param name="force">True if the exit has to be forced, false otherwise.</param>
         /// <remarks>This method cannot hibernate or suspend the system.</remarks>
@@ -409,7 +443,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
                 throw new PrivilegeException(FormatError(Marshal.GetLastWin32Error()));
         }
 
-        /// <summary>Formats an error number into an error message.</summary>
+        /// <summary>
+        /// Formats an error number into an error message.
+        /// </summary>
         /// <param name="number">The error number to convert.</param>
         /// <returns>A string representation of the specified error number.</returns>
         protected static string FormatError(int number)
@@ -419,7 +455,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
             return buffer.ToString();
         }
 
-        /// <summary>Suspends or hibernates the system.</summary>
+        /// <summary>
+        /// Suspends or hibernates the system.
+        /// </summary>
         /// <param name="hibernate">
         /// True if the system has to hibernate, false if the system has to be suspended.
         /// </param>
@@ -438,7 +476,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
 
         #region Public Methods
 
-        /// <summary>Exits windows (and tries to enable any required access rights, if necesarry).</summary>
+        /// <summary>
+        /// Exits windows (and tries to enable any required access rights, if necesarry).
+        /// </summary>
         /// <param name="how">One of the RestartOptions values that specifies how to exit windows.</param>
         /// <param name="force">True if the exit has to be forced, false otherwise.</param>
         /// <exception cref="PrivilegeException">
@@ -475,7 +515,9 @@ namespace SystemT00ls.CoreFunctions.PowerControl
     {
         #region Public Constructors
 
-        /// <summary>Initializes a new instance of the PrivilegeException class.</summary>
+        /// <summary>
+        /// Initializes a new instance of the PrivilegeException class.
+        /// </summary>
         public PrivilegeException() : base() { }
 
         /// <summary>

@@ -7,7 +7,7 @@ content to your help project.</para>
 		</introduction>
 
 		<section>
-			<title>Getting Started</title>
+			<title>Getting Started with MzB Solutions' SystemT00ls</title>
 			<content>
 				<para>To get started, add a documentation source to the project (a Visual Studio solution, project, or
 assembly and XML comments file).  See the <legacyBold>Getting Started</legacyBold> topics in the Sandcastle Help
