@@ -1,4 +1,4 @@
-﻿namespace SystemT00ls.CoreFunctions.System
+﻿namespace SystemT00ls.CoreLib.System.Networking
 {
     /// <summary>
     /// A concrete implementation of a Receiver for the CommandFactory
@@ -15,11 +15,11 @@
             switch (Networking.WhatCommand)
             {
                 case 'r':
-                    _ = new NetworkingFunctions().RenewIPs();
+                    _ = new Functions().RenewIPs();
                     break;
 
                 case 'f':
-                    _ = new NetworkingFunctions().FlushDNSCache();
+                    _ = new Functions().FlushDNSCache();
                     break;
 
                 default:

@@ -3,13 +3,13 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SystemT00ls.CoreFunctions.System
+namespace SystemT00ls.CoreLib.System.Networking
 {
     /// <summary>
     /// A simple networking stack, that allows us to run some rudementary functions on Windows'
     /// networking stack
     /// </summary>
-    public partial class NetworkingFunctions
+    public partial class Functions
     {
         #region Private Methods
 
@@ -27,7 +27,7 @@ namespace SystemT00ls.CoreFunctions.System
             {
                 'r' => "/C ipconfig /release",
                 'n' => "/C ipconfig /renew",
-                _ => String.Empty,
+                _ => string.Empty,
             };
             _result = -255;
             ProcessStartInfo startInfo = new ProcessStartInfo
@@ -36,7 +36,7 @@ namespace SystemT00ls.CoreFunctions.System
                 FileName = "cmd.exe",
                 Arguments = arg
             };
-            if (arg != String.Empty)
+            if (arg != string.Empty)
             {
                 Process process = new Process
                 {
@@ -108,7 +108,7 @@ namespace SystemT00ls.CoreFunctions.System
         /// <summary>
         /// NetworkingFunctions(?) Constuctor
         /// </summary>
-        public NetworkingFunctions()
+        public Functions()
         {
             switch (Networking.WhatCommand)
             {

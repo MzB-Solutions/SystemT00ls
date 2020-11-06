@@ -1,0 +1,45 @@
+<project outputDir="C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\obj\Release" baseDir="C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\obj\Release" xmlns="http://confuser.codeplex.com">
+<rule pattern="true" />
+<module path="SystemT00ls.cli.dll">
+<rule pattern="true">
+<protection id="anti ildasm" />
+<protection id="anti tamper" />
+<protection id="constants" />
+<protection id="ctrl flow" />
+<protection id="anti dump" />
+<protection id="anti debug" />
+<protection id="ref proxy" />
+<protection id="resources" />
+<protection id = "rename" >
+<argument name = "mode" value = "decodable" />
+<argument name = "renPublic" value = "false" />
+<argument name = "renEnum" value = "false" />
+<argument name = "renameArgs" value = "false" />
+</protection >
+</rule>
+</module>
+<probePath>..\..\..\EasyConsole.Core\EasyConsole.Core\bin\Release\netcoreapp3.1</probePath>
+<probePath>C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.fileproviders.physical\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.fileproviders.abstractions\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\system.directoryservices.accountmanagement\4.7.0\ref\netstandard2.0</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.primitives\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.configuration\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.logging.configuration\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.logging.debug\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.configuration.json\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.configuration.environmentvariables\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.filesystemglobbing\3.1.9\lib\netstandard2.0</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.configuration.binder\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.logging.console\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\3.1.9\lib\netstandard2.0</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.options.configurationextensions\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.options\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.logging\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.dependencyinjection\3.1.9\lib\netcoreapp3.1</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\system.security.principal.windows\4.7.0\ref\netcoreapp3.0</probePath>
+<probePath>C:\Users\smzb\.nuget\packages\microsoft.extensions.logging.abstractions\3.1.9\lib\netstandard2.0</probePath>
+<probePath>..\..\..\SystemT00ls.CoreFunctions\bin\Release\netcoreapp3.1</probePath>
+</project>

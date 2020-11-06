@@ -7,14 +7,40 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-windows64:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
       with:
-        submodules: true
+        submodules: recursive
+#    - name: Install SHFB via chocolatey
+#      run: choco install sandcastle
     - name: Install dependencies
       run: dotnet restore
+#    - name: Download Installer Projects Extension
+#      run: wget https://some.file/url.vsix
+#    - name: Enable Windows Installer Projects
+#      run: VSIXInstaller.exe /quiet /admin "url.vsix"
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+  build-linux64:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1
+    - name: Install dependencies
+      run: dotnet restore
+#    - name: Download Installer Projects Extension
+#      run: wget https://some.file/url.vsix
+#    - name: Enable Windows Installer Projects
+#      run: VSIXInstaller.exe /quiet /admin "url.vsix"
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test

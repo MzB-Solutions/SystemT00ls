@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SystemT00ls.CoreFunctions.PowerControl
+namespace SystemT00ls.CoreLib.System.Power
 {
     /// <summary>
     /// An LUID is a 64-bit value guaranteed to be unique only on the system on which it was
@@ -102,7 +102,7 @@ namespace SystemT00ls.CoreFunctions.PowerControl
     /// <summary>
     /// Implements methods to exit Windows.
     /// </summary>
-    public class ExecuteControl
+    public class Control
     {
         #region Private Fields
 
@@ -408,21 +408,32 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         protected static void EnableToken(string privilege)
         {
             if (!CheckEntryPoint("advapi32.dll", "AdjustTokenPrivileges"))
+            {
                 return;
+            }
+
             IntPtr tokenHandle = IntPtr.Zero;
             LUID privilegeLUID = new LUID();
             TOKEN_PRIVILEGES newPrivileges = new TOKEN_PRIVILEGES();
             TOKEN_PRIVILEGES tokenPrivileges;
             if (_openProcessToken(Process.GetCurrentProcess().Handle, _tOKEN_ADJUST_PRIVILEGES | _tOKEN_QUERY, ref tokenHandle) == 0)
+            {
                 throw new PrivilegeException(FormatError(Marshal.GetLastWin32Error()));
+            }
+
             if (_lookupPrivilegeValue("", privilege, ref privilegeLUID) == 0)
+            {
                 throw new PrivilegeException(FormatError(Marshal.GetLastWin32Error()));
+            }
+
             tokenPrivileges.PrivilegeCount = 1;
             tokenPrivileges.Privileges.Attributes = _sE_PRIVILEGE_ENABLED;
             tokenPrivileges.Privileges.pLuid = privilegeLUID;
             int size = 4;
-            if (_adjustTokenPrivileges(tokenHandle, 0, ref tokenPrivileges, 4 + (12 * tokenPrivileges.PrivilegeCount), ref newPrivileges, ref size) == 0)
+            if (_adjustTokenPrivileges(tokenHandle, 0, ref tokenPrivileges, 4 + 12 * tokenPrivileges.PrivilegeCount, ref newPrivileges, ref size) == 0)
+            {
                 throw new PrivilegeException(FormatError(Marshal.GetLastWin32Error()));
+            }
         }
 
         /// <summary>
@@ -438,9 +449,14 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         {
             EnableToken("SeShutdownPrivilege");
             if (force)
+            {
                 how |= _eWX_FORCE;
+            }
+
             if (_exitWindowsEx(how, 0) == 0)
+            {
                 throw new PrivilegeException(FormatError(Marshal.GetLastWin32Error()));
+            }
         }
 
         /// <summary>
@@ -468,8 +484,11 @@ namespace SystemT00ls.CoreFunctions.PowerControl
         protected static void SuspendSystem(bool hibernate, bool force)
         {
             if (!CheckEntryPoint("powrprof.dll", "SetSuspendState"))
+            {
                 throw new PlatformNotSupportedException("The SetSuspendState method is not supported on this system!");
-            _setSuspendState((int)(hibernate ? 1 : 0), (int)(force ? 1 : 0), 0);
+            }
+
+            _setSuspendState(hibernate ? 1 : 0, force ? 1 : 0, 0);
         }
 
         #endregion Protected Methods

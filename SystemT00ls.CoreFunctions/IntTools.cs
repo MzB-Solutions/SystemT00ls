@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SystemT00ls.CoreFunctions
+namespace SystemT00ls.CoreLib
 {
     /// <summary>
     /// A few simple tools for int handling (ensure its non-null etc)
@@ -24,9 +24,14 @@ namespace SystemT00ls.CoreFunctions
         public static T Clamp<T>(T value, T min, T max) where T : notnull, IComparable<T>
         {
             if (value.CompareTo(min) < 0)
+            {
                 return min;
+            }
+
             if (value.CompareTo(max) > 0)
+            {
                 return max;
+            }
 
             return value;
         }

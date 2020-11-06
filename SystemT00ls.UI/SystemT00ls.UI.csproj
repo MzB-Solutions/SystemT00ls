@@ -21,6 +21,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreFunctions.csproj" />
+    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreLib.csproj" />
   </ItemGroup>
 </Project>

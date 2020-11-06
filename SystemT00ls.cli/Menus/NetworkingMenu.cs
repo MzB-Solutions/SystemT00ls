@@ -1,7 +1,7 @@
 ﻿using EasyConsole;
 using Microsoft.Extensions.Logging;
 using System;
-using SystemT00ls.CoreFunctions.System;
+using SystemT00ls.CoreLib.System.Networking;
 
 namespace SystemT00ls.cli.Menus
 {
@@ -18,7 +18,7 @@ namespace SystemT00ls.cli.Menus
             : base("Networking Tools", program,
                   new Option("Flush DNS Resolvers", () =>
                   {
-                      var StackInstance = new NetworkingFunctions();
+                      var StackInstance = new Functions();
                       var returnCode = StackInstance.FlushDNSCache();
                       logger.LogDebug($"#{DateTime.Now}#: FLushing the DNS resolvers resulted in the following return code: {returnCode}");
                       logger.LogDebug(Networking.LogMessage);
@@ -27,7 +27,7 @@ namespace SystemT00ls.cli.Menus
 
                   new Option("Renew IP Address", () =>
                   {
-                      var StackInstance = new NetworkingFunctions();
+                      var StackInstance = new Functions();
                       var returnCode = StackInstance.RenewIPs();
                       logger.LogDebug($"#{DateTime.Now}#: Renewing the IP address(es) resulted in the following return code: {returnCode}");
                       logger.LogDebug(Networking.LogMessage);

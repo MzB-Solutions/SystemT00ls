@@ -4,8 +4,8 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 using SystemT00ls.cli.Menus;
-using SystemT00ls.CoreFunctions.ActiveDirectory;
-using SystemT00ls.CoreFunctions.Configuration;
+using SystemT00ls.CoreLib.ActiveDirectory;
+using SystemT00ls.CoreLib.Configuration;
 using static SystemT00ls.cli.Notice;
 
 namespace SystemT00ls.cli

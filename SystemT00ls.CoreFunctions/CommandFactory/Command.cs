@@ -1,12 +1,11 @@
-﻿using SystemT00ls.CoreFunctions.System;
-using SystemT00ls.CoreFunctions.System.Commands;
+﻿using SystemT00ls.CoreLib.System.Networking;
 
-namespace SystemT00ls.CoreFunctions.CommandFactory
+namespace SystemT00ls.CoreLib.CommandFactory
 {
     /// <summary>
     /// All commands should be based of this class
     /// </summary>
-    /// <remarks>Here's an <see cref="NetworkingCommands">example</see>.</remarks>
+    /// <remarks>Here's an <see cref="Commands">example</see>.</remarks>
     internal abstract class Command
     {
         #region Protected Fields
@@ -28,7 +27,7 @@ namespace SystemT00ls.CoreFunctions.CommandFactory
         /// </param>
         public Command(Receiver receiver)
         {
-            this.Receiver = receiver;
+            Receiver = receiver;
         }
 
         #endregion Public Constructors
