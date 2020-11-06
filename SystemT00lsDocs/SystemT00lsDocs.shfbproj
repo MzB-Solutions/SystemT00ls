@@ -60,21 +60,49 @@
     <ComponentConfigurations>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
-  <basePath value="{@HtmlEncProjectFolder}" />
-  <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
-  <allowMissingSource value="true" />
-  <removeRegionMarkers value="false" />
-  <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="true" outlining="true" keepSeeTags="true" defaultTitle="true" />
-</component>
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
+          <allowMissingSource value="true" />
+          <removeRegionMarkers value="false" />
+          <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="true" outlining="true" keepSeeTags="true" defaultTitle="true" />
+        </component>
       </ComponentConfig>
-<ComponentConfig id="IntelliSense Component" enabled="True"><component id="IntelliSense Component">
-  <output includeNamespaces="true" namespacesFile="Namespaces" folder="{@OutputFolder}" boundedCapacity="100" />
-</component></ComponentConfig>
-<ComponentConfig id="Syntax Component" enabled="True"><component id="Syntax Component"><syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="true" /><generators>
+      <ComponentConfig id="IntelliSense Component" enabled="True">
+        <component id="IntelliSense Component">
+          <output includeNamespaces="true" namespacesFile="Namespaces" folder="{@OutputFolder}" boundedCapacity="100" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Syntax Component" enabled="True">
+        <component id="Syntax Component">
+          <syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="true" />
+          <generators>
     {@SyntaxFilters}
-</generators><containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" /><configurations><generator id="C#" /><generator id="Visual Basic"><includeLineContinuation value="false" /></generator><generator id="Visual Basic Usage"><includeLineContinuation value="false" /></generator><generator id="Managed C++" /><generator id="F#" /><generator id="J#" /><generator id="JScript" /><generator id="JavaScript" /><generator id="XAML Usage" /><generator id="ASP.NET" /><generator id="X#" /></configurations></component></ComponentConfig>
-<ComponentConfig id="API Token Resolution" enabled="True"><component id="API Token Resolution">{@TokenFiles}
-<replace elements="/*//token" item="string(.)" /></component></ComponentConfig></ComponentConfigurations>
+</generators>
+          <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" />
+          <configurations>
+            <generator id="C#" />
+            <generator id="Visual Basic">
+              <includeLineContinuation value="false" />
+            </generator>
+            <generator id="Visual Basic Usage">
+              <includeLineContinuation value="false" />
+            </generator>
+            <generator id="Managed C++" />
+            <generator id="F#" />
+            <generator id="J#" />
+            <generator id="JScript" />
+            <generator id="JavaScript" />
+            <generator id="XAML Usage" />
+            <generator id="ASP.NET" />
+            <generator id="X#" />
+          </configurations>
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="API Token Resolution" enabled="True">
+        <component id="API Token Resolution">{@TokenFiles}
+<replace elements="/*//token" item="string(.)" /></component>
+      </ComponentConfig>
+    </ComponentConfigurations>
     <PlugInConfigurations />
     <CatalogProductId>VS</CatalogProductId>
     <CatalogVersion>100</CatalogVersion>
@@ -88,19 +116,20 @@
     <HtmlHelp1xCompilerPath>C:\Program Files (x86)\HTML Help Workshop\</HtmlHelp1xCompilerPath>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="CompiledAvaloniaXaml" isDocumented="False" />
-<NamespaceSummaryItem name="EasyConsole" isDocumented="True">git submodule containing a .NET core version of EasyConsole</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.cli" isDocumented="True">SystemT00ls cli app</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.cli.Menus" isDocumented="True">The menus for the cli</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.CoreFunctions" isDocumented="True">All included functions in the base version of SystemT00ls without plugins etc</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.CoreFunctions.ActiveDirectory" isDocumented="True">Some AD functions</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.CoreFunctions.CommandFactory" isDocumented="True">A command factory that we can inherit from and simple let our app execute into</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.CoreFunctions.Configuration" isDocumented="True">A very simple Config "array"</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.CoreFunctions.System" isDocumented="True">Some (windows)system calls and functions</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.CoreFunctions.System.Commands" isDocumented="True">An inherited Command from the CommandFactory</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.UI" isDocumented="True">A very simply AvaloniaUI app</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.UI.ViewModels" isDocumented="True">Avalonia ViewModels
+      <NamespaceSummaryItem name="EasyConsole" isDocumented="True">git submodule containing a .NET core version of EasyConsole</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.cli" isDocumented="True">SystemT00ls cli app</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.cli.Menus" isDocumented="True">The menus for the cli</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.CoreFunctions" isDocumented="True">All included functions in the base version of SystemT00ls without plugins etc</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.CoreFunctions.ActiveDirectory" isDocumented="True">Some AD functions</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.CoreFunctions.CommandFactory" isDocumented="True">A command factory that we can inherit from and simple let our app execute into</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.CoreFunctions.Configuration" isDocumented="True">A very simple Config "array"</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.CoreFunctions.System" isDocumented="True">Some (windows)system calls and functions</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.CoreFunctions.System.Commands" isDocumented="True">An inherited Command from the CommandFactory</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.UI" isDocumented="True">A very simply AvaloniaUI app</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="SystemT00ls.UI.ViewModels" isDocumented="True">Avalonia ViewModels
 How is data represented and exposed to the UI?</NamespaceSummaryItem>
-<NamespaceSummaryItem name="SystemT00ls.UI.Views" isDocumented="True">AvaloniaUI Views (actual pages with content)</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="SystemT00ls.UI.Views" isDocumented="True">AvaloniaUI Views (actual pages with content)</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <CopyrightHref>https://mzb.company/about/copyright</CopyrightHref>
     <CopyrightText>&amp;amp%3bcopy%3b 2000-2020</CopyrightText>
   </PropertyGroup>
@@ -150,8 +179,8 @@ How is data represented and exposed to the UI?</NamespaceSummaryItem>
       <Project>{681117c2-a5b5-42ac-ad0b-25e0f64b318b}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreFunctions.csproj">
-      <Name>SystemT00ls.CoreFunctions</Name>
+    <ProjectReference Include="..\SystemT00ls.CoreFunctions\SystemT00ls.CoreLib.csproj">
+      <Name>SystemT00ls.CoreLib</Name>
       <Project>{dab5d5ef-cbca-41a0-96da-a12c10d78e43}</Project>
       <Private>True</Private>
     </ProjectReference>

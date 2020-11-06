@@ -1,4 +1,4 @@
-﻿namespace SystemT00ls.CoreFunctions.CommandFactory
+﻿namespace SystemT00ls.CoreLib.CommandFactory
 {
     internal class Invoker
     {

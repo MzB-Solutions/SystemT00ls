@@ -1,7 +1,7 @@
 ﻿using EasyConsole;
 using Microsoft.Extensions.Logging;
 using System;
-using SystemT00ls.CoreFunctions.PowerControl;
+using SystemT00ls.CoreLib.System.Power;
 
 namespace SystemT00ls.cli.Menus
 {
@@ -12,10 +12,10 @@ namespace SystemT00ls.cli.Menus
         public ComputerMenu(Program program, ILogger<App> logger)
             : base("Computer Behaviour", program,
                   new Option("Networking", () => program.NavigateTo<NetworkingMenu>()),
-                  new Option("Reboot", () => ExecuteControl.ExitWindows(RestartOptions.Reboot, true)),
-                  new Option("Poweroff", () => ExecuteControl.ExitWindows(RestartOptions.PowerOff, true)),
-                  new Option("Suspend", () => ExecuteControl.ExitWindows(RestartOptions.Suspend, true)),
-                  new Option("Logoff", () => ExecuteControl.ExitWindows(RestartOptions.LogOff, true))
+                  new Option("Reboot", () => Control.ExitWindows(RestartOptions.Reboot, true)),
+                  new Option("Poweroff", () => Control.ExitWindows(RestartOptions.PowerOff, true)),
+                  new Option("Suspend", () => Control.ExitWindows(RestartOptions.Suspend, true)),
+                  new Option("Logoff", () => Control.ExitWindows(RestartOptions.LogOff, true))
                        )
         {
             logger.LogDebug($"ComputerMenu built on : {DateTime.Now}");

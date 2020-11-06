@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
-using SystemT00ls.CoreFunctions.Configuration;
+using SystemT00ls.CoreLib.Configuration;
 
 namespace SystemT00ls.cli
 {

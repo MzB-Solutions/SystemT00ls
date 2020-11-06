@@ -1,8 +1,8 @@
-﻿using SystemT00ls.CoreFunctions.CommandFactory;
+﻿using SystemT00ls.CoreLib.CommandFactory;
 
-namespace SystemT00ls.CoreFunctions.System.Commands
+namespace SystemT00ls.CoreLib.System.Networking
 {
-    internal class NetworkingCommands : Command
+    internal class Commands : Command
     {
         #region Public Constructors
 
@@ -10,7 +10,7 @@ namespace SystemT00ls.CoreFunctions.System.Commands
         /// Inherited Command Receiver
         /// </summary>
         /// <param name="receiver"></param>
-        public NetworkingCommands(Receiver receiver) : base(receiver)
+        public Commands(Receiver receiver) : base(receiver)
         {
         }
 
@@ -21,7 +21,10 @@ namespace SystemT00ls.CoreFunctions.System.Commands
         /// <summary>
         /// The Invoker execute command
         /// </summary>
-        public override void Execute() => Receiver.Action();
+        public override void Execute()
+        {
+            Receiver.Action();
+        }
 
         #endregion Public Methods
     }

@@ -1,7 +1,7 @@
 ﻿using EasyConsole;
 using System;
 using System.Threading;
-using SystemT00ls.CoreFunctions;
+using SystemT00ls.CoreLib;
 using static SystemT00ls.cli.OurCursor;
 
 namespace SystemT00ls.cli
