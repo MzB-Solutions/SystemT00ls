@@ -1,0 +1,21 @@
+name: SandcastleHelpFileBuilder
+on:
+  push:
+    branches:
+      - docs
+      - master
+  pull_request:
+    branches:
+      - docs
+      - master
+jobs:
+  build-docs:
+    runs-on: [self-hosted,shfb]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Documentation --no-restore

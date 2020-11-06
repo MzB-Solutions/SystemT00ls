@@ -11,9 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.gitmodules = .gitmodules
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
 		LICENSE = LICENSE
 		README.md = README.md
-		.github\workflows\SystemT00lsWorkflows.yml = .github\workflows\SystemT00lsWorkflows.yml
+		.github\workflows\shfb.yml = .github\workflows\shfb.yml
 	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "SystemT00lsDocs", "SystemT00lsDocs\SystemT00lsDocs.shfbproj", "{F2F970C9-B508-432F-8AAD-E238F8AC2F77}"
@@ -71,7 +72,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {962F6BD8-DE44-4D9A-9F85-4B9408049B3B}
+		BuildVersion_StartDate = 2000/1/1
 	EndGlobalSection
 EndGlobal
