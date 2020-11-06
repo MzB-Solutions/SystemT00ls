@@ -30,6 +30,7 @@
       <DocumentationSource sourceFile="..\SystemT00ls.cli\SystemT00ls.xml" />
       <DocumentationSource sourceFile="..\SystemT00ls.UI\SystemT00ls.UI.xml" />
       <DocumentationSource sourceFile="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.xml" />
+      <DocumentationSource sourceFile="..\SystemT00ls-Full.sln" />
     </DocumentationSources>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <SyntaxFilters>C#, XAML Usage</SyntaxFilters>
@@ -128,6 +129,7 @@ How is data represented and exposed to the UI?</NamespaceSummaryItem>
     </NamespaceSummaries>
     <CopyrightHref>https://mzb.company/about/copyright</CopyrightHref>
     <CopyrightText>&amp;amp%3bcopy%3b 2000-2020</CopyrightText>
+    <ProductTitle>SystemT00ls Helpfile</ProductTitle>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
