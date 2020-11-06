@@ -1,19 +1,22 @@
 ﻿using EasyConsole;
+using Microsoft.Extensions.Logging;
 using System;
 
-namespace SystemT00ls.Menus
+namespace SystemT00ls.cli.Menus
 {
     internal class MainMenu : MenuPage
     {
         #region Public Constructors
 
-        public MainMenu(Program program)
+        public MainMenu(Program program, ILogger<App> logger)
             : base("SystemT00ls", program,
                   new Option("Active Directory", () => program.NavigateTo<ActiveDirectoryMenu>()),
                   new Option("Docker4Windows", () => program.NavigateTo<DockerMenu>()),
                   new Option("Computer Behaviour", () => program.NavigateTo<ComputerMenu>()),
                   new Option("Quit Application", () => Environment.Exit(0)))
-        { }
+        {
+            logger.LogDebug($"MainMenu built on : {DateTime.Now}");
+        }
 
         #endregion Public Constructors
 
@@ -21,7 +24,7 @@ namespace SystemT00ls.Menus
 
         public override void Display()
         {
-            App.DoNotice("This is beta-software!", 0, false, Notice.NoticeType.Warning, ConsoleColor.DarkBlue);
+            App.DoNotice("This is beta-software!", 0, false, Notice.NoticeType.Info, ConsoleColor.DarkBlue);
             base.Display();
         }
 
