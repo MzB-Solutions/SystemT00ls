@@ -10,7 +10,7 @@ on:
       - master
 jobs:
   build-docs:
-    runs-on: [self-hosted,shfb]
+    runs-on: shfb
     steps:
     - uses: actions/checkout@v2
       with:
