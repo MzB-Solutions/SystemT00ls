@@ -8,8 +8,13 @@
     <Version>20.11.86</Version>
     <FileVersion>20.11.86</FileVersion>
     <AssemblyVersion>20.11.86</AssemblyVersion>
+    <Configurations>Debug;Release;Documentation</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\SystemT00ls.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\SystemT00ls.xml</DocumentationFile>
   </PropertyGroup>
@@ -18,7 +23,17 @@
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|x86'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|x64'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>

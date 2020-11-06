@@ -83,6 +83,43 @@
                 }
             }
         }
+        "Documentation"
+        {
+        "DisplayName" = "8:Documentation"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:Documentation\\SystemTools.WinSetup.msi"
+        "PackageFilesAs" = "3:1"
+        "PackageFileSize" = "3:10485760"
+        "CabType" = "3:2"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.3.1.x64"
+                    {
+                    "Name" = "8:.NET Core Runtime 3.1 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.3.1.x64"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.3.1.x86"
+                    {
+                    "Name" = "8:.NET Core Runtime 3.1 (x86)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.3.1.x86"
+                    }
+                }
+            }
+        }
         "Release"
         {
         "DisplayName" = "8:Release"
@@ -748,7 +785,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2C1951B6B8E14590A3A92BBEC5A169E2"
             {
-            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.cli.exe"
+            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.cli.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
@@ -776,7 +813,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_36D4CBFC19F248909BD4D6DD09197CE0"
             {
-            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.UI.exe"
+            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.UI.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
@@ -888,7 +925,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6237BAA8A47A4AF19B1073AE26D27B68"
             {
-            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.cli.dll"
+            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.cli.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
@@ -972,7 +1009,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EB2233D61DDE455CBDE37F10765CE887"
             {
-            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.UI.dll"
+            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.UI.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
