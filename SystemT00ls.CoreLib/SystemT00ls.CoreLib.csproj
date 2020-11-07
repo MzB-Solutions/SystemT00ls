@@ -4,7 +4,8 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <AssemblyName>SystemT00ls.CoreLib</AssemblyName>
     <RootNamespace>SystemT00ls.CoreLib</RootNamespace>
-    <ApplicationIcon></ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <Version>20.11.86</Version>
     <FileVersion>20.11.86</FileVersion>
     <AssemblyVersion>20.11.86</AssemblyVersion>
@@ -63,7 +64,11 @@
     </None>
   </ItemGroup>
   <Target Name="AfterCompile">
-    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&quot;$(ProjectDir)_ConfuserEx\Confuser.CLI.exe&quot; &quot;$(ProjectDir)_ConfuserEx\c.crproj&quot;)&#xD;&#xA;" />
+    <Exec Command="echo &quot;&quot;" />
   </Target>
-  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2000/1/1" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
