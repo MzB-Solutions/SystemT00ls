@@ -11,6 +11,13 @@ jobs:
     #runs-on: [self-hosted]
     runs-on: [windows-latest]
     steps:
+    - name: Notify of Build start
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORDBUILDSBOT }}
+        status: ${{ job.status }}
+        username: MzB Build Notifications
     - uses: actions/checkout@v2
       with:
         submodules: recursive

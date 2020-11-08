@@ -8,6 +8,13 @@ jobs:
   build-windows64:
     runs-on: windows-latest
     steps:
+    - name: Notify of Build start
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORDBUILDSBOT }}
+        status: ${{ job.status }}
+        username: MzB Build Notifications
     - uses: actions/checkout@v2
       with:
         submodules: recursive
@@ -26,6 +33,13 @@ jobs:
   build-linux64:
     runs-on: ubuntu-latest
     steps:
+    - name: Notify of Build start
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORDBUILDSBOT }}
+        status: ${{ job.status }}
+        username: MzB Build Notifications
     - uses: actions/checkout@v2
       with:
         submodules: recursive
