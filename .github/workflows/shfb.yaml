@@ -8,9 +8,10 @@ on:
       - docs
 jobs:
   build-docs:
-    #runs-on: [self-hosted]
     runs-on: [windows-latest]
     steps:
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
     - name: Notify of Build start
       uses: sarisia/actions-status-discord@v1
       if: always()
@@ -24,6 +25,5 @@ jobs:
     - name: Install SHFB
       run: choco install sandcastle
     - name: Build
-#      run: dotnet build --configuration Documentation --no-restore
       run: msbuild /p:Configuration=Documentation ./SystemToolsDocs/SystemT00lsDocs.shfbproj
 

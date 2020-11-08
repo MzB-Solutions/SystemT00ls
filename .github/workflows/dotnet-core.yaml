@@ -18,14 +18,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
-#    - name: Install SHFB via chocolatey
-#      run: choco install sandcastle
     - name: Install dependencies
       run: dotnet restore
-#    - name: Download Installer Projects Extension
-#      run: wget https://some.file/url.vsix
-#    - name: Enable Windows Installer Projects
-#      run: VSIXInstaller.exe /quiet /admin "url.vsix"
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
@@ -49,10 +43,6 @@ jobs:
         dotnet-version: 3.1
     - name: Install dependencies
       run: dotnet restore
-#    - name: Download Installer Projects Extension
-#      run: wget https://some.file/url.vsix
-#    - name: Enable Windows Installer Projects
-#      run: VSIXInstaller.exe /quiet /admin "url.vsix"
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
