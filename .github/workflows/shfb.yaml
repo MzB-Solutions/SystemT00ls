@@ -33,7 +33,10 @@ jobs:
         restore-keys: ${{ runner.os }}-nuget-
     - name: Install SandcasteHelpFileBuilder via NuGet (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
-      run: dotnet add package EWSoftware.SHFB --version 2020.3.6
+      run: |
+        cd SystemT00lsDocs
+        dotnet add package EWSoftware.SHFB --version 2020.3.6
+        cd ..
     - name: Build source to generate xml files
       run: |
         dotnet restore
