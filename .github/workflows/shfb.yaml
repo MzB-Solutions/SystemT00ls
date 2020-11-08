@@ -39,6 +39,4 @@ jobs:
         dotnet build -v m --configuration Release --no-restore
     - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
-      run: dotnet restore -v n
-    - name: Build source to generate xml files and documentation
-      run: dotnet build -v n --configuration Documentation --no-restore
+      run: dotnet build -v n --configuration Documentation
