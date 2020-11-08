@@ -17,8 +17,8 @@ namespace SystemT00ls.cli
               {
 #if DEBUG
                   builder.AddConsole();
-#endif
                   builder.AddDebug();
+#endif
                   builder.AddSentry("https://24ee821a095642999a8a13692aae9a43@o253741.ingest.sentry.io/5508609");
               });
 
