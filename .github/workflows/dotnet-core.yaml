@@ -15,7 +15,6 @@ jobs:
         webhook: ${{ secrets.DISCORDBUILDSBOT }}
         status: ${{ job.status }}
         username: MzB Build Notifications
-
     - uses: actions/checkout@v2
       with:
         submodules: recursive
@@ -65,7 +64,7 @@ jobs:
       shell: powershell
       run: |
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        dotnet build -v d --configuration Debug --no-restore
+        dotnet build --configuration Debug --no-restore -v d
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
   build-windows64:
     runs-on: windows-latest
@@ -83,9 +82,9 @@ jobs:
     - name: Install dependencies
       run: dotnet restore -v d
     - name: Build
-      run: dotnet build -v d --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore -v d
     - name: Test
-      run: dotnet test -v d --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity d
   build-linux64:
     runs-on: ubuntu-latest
     steps:
@@ -106,6 +105,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore -v d
     - name: Build
-      run: dotnet build -v d --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore -v d
     - name: Test
-      run: dotnet test -v d --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity d
