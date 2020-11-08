@@ -26,14 +26,14 @@ jobs:
       id: cache-shfb
       uses: actions/cache@v2
       env:
-        cache-name: cache-shfb-choco
+        cache-name: cache-shfb-nuget
       with:
-        path: C:\ProgramData\chocolatey\lib\sandcastle\
-        key: ${{ runner.os }}-shfb-choco
-        restore-keys: ${{ runner.os }}-shfb-choco
-    - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: ${{ runner.os }}-nuget-
+    - name: Install SandcasteHelpFileBuilder via NuGet (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
-      run: choco install sandcastle
+      run: dotnet add package EWSoftware.SHFB --version 2020.3.6
     - name: Build source to generate xml files
       run: |
         dotnet restore
