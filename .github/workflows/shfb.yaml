@@ -26,7 +26,7 @@ jobs:
       id: cache-shfb
       uses: actions/cache@v1
       with:
-        path: [ ${{ env.ChocolateyInstall }}\lib\sandcastle ]
+        path: ${{ env.ChocolateyInstall }}\lib\sandcastle
         key: ${{ runner.os }}-shfb-choco
         restore-keys: ${{ runner.os }}-shfb-choco
     - name: Install SandcasteHelpFileBuilder via Chocolatey
