@@ -19,29 +19,26 @@ jobs:
         username: MzB Build Notifications
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Cache Sandcastle HelpFile Builder
       id: cache-shfb
       uses: actions/cache@v2
       env:
         cache-name: cache-shfb-choco
       with:
-#        path: C:\ProgramData\chocolatey\lib\sandcastle\
         path: |
           ~/.nuget/packages
           packages/
-#        key: ${{ runner.os }}-shfb-choco
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-#        restore-keys: ${{ runner.os }}-shfb-choco
         restore-keys: ${{ runner.os }}-nuget-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
+    - name: Build the package itself before doc parsing
+      run: |
+        dotnet restore -v m --configuration Release
+        dotnet build -v m --configuration Release --no-restore
     - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
-#      run: choco install sandcastle
-      run: dotnet restore -v n
+      run: dotnet restore -v n --configuration Documentation
     - name: Build source to generate xml files and documentation
-      run: |
-        dotnet build -v n --configuration Documentation --no-restore
-#        msbuild -t:build -restore /p:Configuration=Documentation SystemT00ls-Full.sln
-
+      run: dotnet build -v n --configuration Documentation --no-restore
