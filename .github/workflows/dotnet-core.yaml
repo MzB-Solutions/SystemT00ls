@@ -18,8 +18,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
-    - name: show full sub-dir tree of pwd
-      run: du -a .
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
@@ -58,7 +56,7 @@ jobs:
         New-Item -Path .\.sonar\scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
     - name: Install dependencies
-      run: dotnet restore -v d
+      run: dotnet restore -v n
     - name: Build and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -67,7 +65,7 @@ jobs:
       run: |
         mv sonar-project.properties sonar-project.old
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        dotnet build --configuration Debug --no-restore -v d
+        dotnet build --configuration Debug --no-restore -v n
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
         mv sonar-project.old sonar-project.properties
   build-windows64:
@@ -84,11 +82,11 @@ jobs:
       with:
         submodules: recursive
     - name: Install dependencies
-      run: dotnet restore -v d
+      run: dotnet restore -v n
     - name: Build
-      run: dotnet build --configuration Release --no-restore -v d
+      run: dotnet build --configuration Release --no-restore -v n
     - name: Test
-      run: dotnet test --no-restore --verbosity d
+      run: dotnet test --no-restore --verbosity n
   build-linux64:
     runs-on: ubuntu-latest
     steps:
@@ -107,8 +105,8 @@ jobs:
       with:
         dotnet-version: 3.1
     - name: Install dependencies
-      run: dotnet restore -v d
+      run: dotnet restore -v n
     - name: Build
-      run: dotnet build --configuration Release --no-restore -v d
+      run: dotnet build --configuration Release --no-restore -v n
     - name: Test
-      run: dotnet test --no-restore --verbosity d
+      run: dotnet test --no-restore --verbosity n
