@@ -57,9 +57,7 @@ jobs:
         New-Item -Path .\.sonar\scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
     - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Debug --no-restore
+      run: dotnet restore -v d
     - name: Build and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -67,7 +65,7 @@ jobs:
       shell: powershell
       run: |
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        dotnet clean --configuration Debug
+        dotnet build -v d --configuration Debug --no-restore
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
   build-windows64:
     runs-on: windows-latest
@@ -83,11 +81,11 @@ jobs:
       with:
         submodules: recursive
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore -v d
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build -v d --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test -v d --no-restore --verbosity normal
   build-linux64:
     runs-on: ubuntu-latest
     steps:
@@ -106,8 +104,8 @@ jobs:
       with:
         dotnet-version: 3.1
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore -v d
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build -v d --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test -v d --no-restore --verbosity normal
