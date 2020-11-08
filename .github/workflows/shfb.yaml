@@ -24,9 +24,9 @@ jobs:
         submodules: recursive
     - name: Cache Sandcastle HelpFile Builder
       id: cache-shfb
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
-        path: ${{ env.ChocolateyInstall }}\lib\sandcastle
+        path: C:\ProgramData\chocolatey\lib\sandcastle\
         key: ${{ runner.os }}-shfb-choco
         restore-keys: ${{ runner.os }}-shfb-choco
     - name: Install SandcasteHelpFileBuilder via Chocolatey
