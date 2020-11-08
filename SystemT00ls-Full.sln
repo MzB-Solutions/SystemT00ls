@@ -39,13 +39,11 @@ Global
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
-		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAB5D5EF-CBCA-41A0-96DA-A12C10D78E43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
-		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2B71709-A7D2-486C-9D99-97297C3D26C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2F970C9-B508-432F-8AAD-E238F8AC2F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -55,13 +53,11 @@ Global
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
-		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{681117C2-A5B5-42AC-AD0B-25E0F64B318B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
-		{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
 		{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9086A547-55BF-4ADC-B18B-2508AF733F0B}.Debug|Any CPU.ActiveCfg = Debug
@@ -72,7 +68,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {962F6BD8-DE44-4D9A-9F85-4B9408049B3B}
 		BuildVersion_StartDate = 2000/1/1
+		SolutionGuid = {962F6BD8-DE44-4D9A-9F85-4B9408049B3B}
 	EndGlobalSection
 EndGlobal
