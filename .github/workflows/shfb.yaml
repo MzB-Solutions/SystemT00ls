@@ -28,18 +28,19 @@ jobs:
 #        path: C:\ProgramData\chocolatey\lib\sandcastle\
         path: |
           ~/.nuget/packages
-          ./packages/
+          packages/
 #        key: ${{ runner.os }}-shfb-choco
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
 #        restore-keys: ${{ runner.os }}-shfb-choco
         restore-keys: ${{ runner.os }}-nuget-
-#    - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
-#      if: steps.cache-shfb.outputs.cache-hit != 'true'
-#      run: choco install sandcastle
-#      run: 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
+    - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
+      if: steps.cache-shfb.outputs.cache-hit != 'true'
+#      run: choco install sandcastle
+      run: dotnet restore -v n
     - name: Build source to generate xml files and documentation
       run: |
-        msbuild -t:build -restore /p:Configuration=Documentation SystemT00ls-Full.sln
+#        msbuild -t:build -restore /p:Configuration=Documentation SystemT00ls-Full.sln
+        dotnet build -v n --configuration Documentation --no-restore
