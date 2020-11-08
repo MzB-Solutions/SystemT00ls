@@ -13,17 +13,17 @@ namespace SystemT00ls.cli
 
         private static void _configureServices(IServiceCollection _services)
         {
-            // configure logging
-            _ = _services.AddLogging(builder =>
+            _services.AddLogging(builder =>
               {
 #if DEBUG
                   builder.AddConsole();
 #endif
                   builder.AddDebug();
+                  builder.AddSentry("https://24ee821a095642999a8a13692aae9a43@o253741.ingest.sentry.io/5508609");
               });
 
             // build config
-            _ = _services.Configure<AppConfig>(new ConfigurationBuilder()
+            _services.Configure<AppConfig>(new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
@@ -32,7 +32,7 @@ namespace SystemT00ls.cli
             // add services: services.AddTransient<IMyRespository, MyConcreteRepository>();
 
             // add app
-            _ = _services.AddTransient<App>();
+            _services.AddTransient<App>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "This is the apps entrypoint, it's always named Main()")]
@@ -40,11 +40,11 @@ namespace SystemT00ls.cli
         private static async Task Main(string[] args)
         {
             // create service collection
-            var services = new ServiceCollection();
+            ServiceCollection services = new ServiceCollection();
             _configureServices(services);
 
             // create service provider
-            var serviceProvider = services.BuildServiceProvider();
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
 
             // entry to run app
             await serviceProvider.GetService<App>().RunMe(args);
