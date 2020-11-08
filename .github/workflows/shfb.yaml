@@ -3,11 +3,9 @@ on:
   push:
     branches:
       - docs
-      - master
   pull_request:
     branches:
       - docs
-      - master
 jobs:
   build-docs:
     runs-on: [self-hosted]
@@ -18,4 +16,5 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Documentation --no-restore
+#      run: dotnet build --configuration Documentation --no-restore
+      run: dotnet build --configuration Documentation
