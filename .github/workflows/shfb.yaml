@@ -10,8 +10,6 @@ jobs:
   build-docs:
     runs-on: [windows-latest]
     steps:
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
     - name: Notify of Build start
       uses: sarisia/actions-status-discord@v1
       if: always()
@@ -19,6 +17,8 @@ jobs:
         webhook: ${{ secrets.DISCORDBUILDSBOT }}
         status: ${{ job.status }}
         username: MzB Build Notifications
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
     - uses: actions/checkout@v2
       with:
         submodules: recursive
