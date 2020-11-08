@@ -17,9 +17,6 @@ jobs:
         webhook: ${{ secrets.DISCORDBUILDSBOT }}
         status: ${{ job.status }}
         username: MzB Build Notifications
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
     - name: Cache Sandcastle HelpFile Builder
@@ -34,8 +31,12 @@ jobs:
     - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
       run: choco install sandcastle
-    - name: Build source to generate xml files
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Build source to generate xml files and documentation
       run: |
+        refeshenv
         dotnet restore
         dotnet build --no-restore --configuration Debug
         msbuild /p:Configuration=Documentation SystemT00ls-Full.sln
