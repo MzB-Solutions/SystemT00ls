@@ -1,4 +1,4 @@
-#name: SandcastleHelpFileBuilder
+name: SandcastleHelpFileBuilder
 on:
   push:
     branches:
