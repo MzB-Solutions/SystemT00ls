@@ -34,7 +34,7 @@ jobs:
     - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
       #run: choco install sandcastle
-      run: dotnet restore
+      run: dotnet restore SystemT00ls-Full.sln
     - uses: actions/checkout@v2
       with:
         submodules: recursive
