@@ -35,10 +35,10 @@ jobs:
         restore-keys: ${{ runner.os }}-nuget-
     - name: Build the package itself before doc parsing
       run: |
-        dotnet restore -v m --configuration Release
+        dotnet restore -v m
         dotnet build -v m --configuration Release --no-restore
     - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
       if: steps.cache-shfb.outputs.cache-hit != 'true'
-      run: dotnet restore -v n --configuration Documentation
+      run: dotnet restore -v n
     - name: Build source to generate xml files and documentation
       run: dotnet build -v n --configuration Documentation --no-restore
