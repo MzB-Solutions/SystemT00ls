@@ -6,9 +6,9 @@
     <RootNamespace>SystemT00ls.CoreLib</RootNamespace>
     <ApplicationIcon>
     </ApplicationIcon>
-    <Version>20.11.86</Version>
-    <FileVersion>20.11.86</FileVersion>
-    <AssemblyVersion>20.11.86</AssemblyVersion>
+    <Version>20.11.87</Version>
+    <FileVersion>20.11.87</FileVersion>
+    <AssemblyVersion>20.11.87</AssemblyVersion>
     <Configurations>Debug;Release;Documentation</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
