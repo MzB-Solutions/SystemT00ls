@@ -1,0 +1,42 @@
+name: SandcastleHelpFileBuilder
+on:
+  push:
+    branches:
+      - docs
+  pull_request:
+    branches:
+      - docs
+jobs:
+  build-docs:
+    runs-on: [windows-latest]
+    steps:
+    - name: Notify of Build start
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORDBUILDSBOT }}
+        status: ${{ job.status }}
+        username: MzB Build Notifications
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Cache Sandcastle HelpFile Builder
+      id: cache-shfb
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-shfb-choco
+      with:
+        path: |
+          ~/.nuget/packages
+          packages/
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: ${{ runner.os }}-nuget-
+    - name: Build the package itself before doc parsing
+      run: |
+        dotnet restore -v m
+        dotnet build -v m --configuration Release --no-restore
+    - name: Install SandcasteHelpFileBuilder via Chocolatey (if !cached)
+      if: steps.cache-shfb.outputs.cache-hit != 'true'
+      run: dotnet build -v n --configuration Documentation

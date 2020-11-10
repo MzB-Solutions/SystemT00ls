@@ -18,19 +18,28 @@ namespace SystemT00ls.cli.Menus
             : base("Networking Tools", program,
                   new Option("Flush DNS Resolvers", () =>
                   {
-                      var StackInstance = new Functions();
-                      var returnCode = StackInstance.FlushDNSCache();
+                      Functions StackInstance = new Functions();
+                      uint returnCode = StackInstance.FlushDNSCache();
                       logger.LogDebug($"#{DateTime.Now}#: FLushing the DNS resolvers resulted in the following return code: {returnCode}");
                       logger.LogDebug(Networking.LogMessage);
+#if DEBUG
+                      logger.LogCritical($"#{DateTime.Now}#: FLushing the DNS resolvers resulted in the following return code: {returnCode}");
+                      logger.LogCritical(Networking.LogMessage);
+#endif
                       program.NavigateTo<NetworkingMenu>();
                   }),
 
                   new Option("Renew IP Address", () =>
                   {
-                      var StackInstance = new Functions();
-                      var returnCode = StackInstance.RenewIPs();
+                      Functions StackInstance = new Functions();
+                      bool returnCode = StackInstance.RenewIPs();
                       logger.LogDebug($"#{DateTime.Now}#: Renewing the IP address(es) resulted in the following return code: {returnCode}");
                       logger.LogDebug(Networking.LogMessage);
+#if DEBUG
+                      logger.LogCritical($"#{DateTime.Now}#: Renewing the IP address(es) resulted in the following return code: {returnCode}");
+                      logger.LogCritical(Networking.LogMessage);
+#endif
+
                       program.NavigateTo<NetworkingMenu>();
                   })
                   )

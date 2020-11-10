@@ -4,21 +4,38 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <AssemblyName>SystemT00ls.CoreLib</AssemblyName>
     <RootNamespace>SystemT00ls.CoreLib</RootNamespace>
-    <ApplicationIcon></ApplicationIcon>
-    <Version>20.11.86</Version>
-    <FileVersion>20.11.86</FileVersion>
-    <AssemblyVersion>20.11.86</AssemblyVersion>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <Version>20.11.87</Version>
+    <FileVersion>20.11.87</FileVersion>
+    <AssemblyVersion>20.11.87</AssemblyVersion>
+    <Configurations>Debug;Release;Documentation</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.CoreLib\SystemT00ls.CoreLib.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|AnyCPU'">
+    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.CoreLib\SystemT00ls.CoreLib.xml</DocumentationFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <DocumentationFile>
     </DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|x86'">
+    <DocumentationFile>
+    </DocumentationFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DocumentationFile>
+    </DocumentationFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|x64'">
     <DocumentationFile>
     </DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -39,6 +56,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.9" />
+    <PackageReference Include="Sentry.Extensions.Logging" Version="2.1.6" />
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.7.0" />
   </ItemGroup>
@@ -48,7 +66,11 @@
     </None>
   </ItemGroup>
   <Target Name="AfterCompile">
-    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&quot;$(ProjectDir)_ConfuserEx\Confuser.CLI.exe&quot; &quot;$(ProjectDir)_ConfuserEx\c.crproj&quot;)&#xD;&#xA;" />
+    <Exec Command="echo &quot;&quot;" />
   </Target>
-  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2000/1/1" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
