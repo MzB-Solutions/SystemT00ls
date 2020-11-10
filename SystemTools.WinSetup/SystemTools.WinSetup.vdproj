@@ -785,7 +785,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2C1951B6B8E14590A3A92BBEC5A169E2"
             {
-            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.cli.exe"
+            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.cli.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
@@ -813,7 +813,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_36D4CBFC19F248909BD4D6DD09197CE0"
             {
-            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.UI.exe"
+            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.UI.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
@@ -834,62 +834,6 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{3F17A9ED-70A7-4579-AAAB-E920DE9A676C}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3929FDC52351428ABEE7E59283AB0B4C"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{F2F970C9-B508-432F-8AAD-E238F8AC2F77}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_471578B211DE4698A4B38ACDA9EFB20D"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
-            "OutputProjectGuid" = "8:{F2F970C9-B508-432F-8AAD-E238F8AC2F77}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
@@ -925,7 +869,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6237BAA8A47A4AF19B1073AE26D27B68"
             {
-            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.cli.dll"
+            "SourcePath" = "8:..\\SystemT00ls.cli\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.cli.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
@@ -1009,7 +953,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EB2233D61DDE455CBDE37F10765CE887"
             {
-            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Documentation\\netcoreapp3.1\\SystemT00ls.UI.dll"
+            "SourcePath" = "8:..\\SystemT00ls.UI\\obj\\Debug\\netcoreapp3.1\\SystemT00ls.UI.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_37136A04B74044429C7CB8E65C661CD8"
