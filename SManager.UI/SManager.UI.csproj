@@ -30,7 +30,7 @@
     <PackageReference Include="Sentry.Extensions.Logging" Version="2.1.6" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemT00ls.CoreLib\SystemT00ls.CoreLib.csproj" />
+    <ProjectReference Include="..\SystemT00ls.CoreLib\SManager.CoreLib.csproj" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
 </Project>
