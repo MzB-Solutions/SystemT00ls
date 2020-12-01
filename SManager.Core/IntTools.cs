@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SManager.CoreLib
+namespace SManager.Core
 {
     /// <summary>
     /// A few simple tools for int handling (ensure its non-null etc)

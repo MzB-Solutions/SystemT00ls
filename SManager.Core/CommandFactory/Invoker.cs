@@ -1,4 +1,4 @@
-﻿namespace SManager.CoreLib.CommandFactory
+﻿namespace SManager.Core.CommandFactory
 {
     internal class Invoker
     {
@@ -16,7 +16,7 @@
         /// <param name="command">Passes in the command to run</param>
         public Invoker(Command command)
         {
-            this._cmd = command;
+            _cmd = command;
         }
 
         #endregion Public Constructors
@@ -26,7 +26,10 @@
         /// <summary>
         /// The inherited Execute command
         /// </summary>
-        public void ExecuteCommand() => _cmd.Execute();
+        public void ExecuteCommand()
+        {
+            _cmd.Execute();
+        }
 
         #endregion Public Methods
     }

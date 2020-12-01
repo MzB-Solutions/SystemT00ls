@@ -1,6 +1,4 @@
-﻿using SManager.CoreLib.System.Networking;
-
-namespace SManager.CoreLib.CommandFactory
+﻿namespace SManager.Core.CommandFactory
 {
     /// <summary>
     /// All commands should be based of this class
@@ -13,11 +11,11 @@ namespace SManager.CoreLib.CommandFactory
         /// <summary>
         /// A Reciver object to contain an Action() command
         /// </summary>
-        protected Receiver Receiver;
+        protected Invoker Receiver;
 
         #endregion Protected Fields
 
-        #region Protected Constructors
+        #region Public Constructors
 
         /// <summary>
         /// The Command Constructor
@@ -25,12 +23,12 @@ namespace SManager.CoreLib.CommandFactory
         /// <param name="receiver">
         /// Takes a Receiver object and upon construction uses it to fill the protected var
         /// </param>
-        protected Command(Receiver receiver)
+        public Command(Invoker receiver)
         {
             Receiver = receiver;
         }
 
-        #endregion Protected Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
