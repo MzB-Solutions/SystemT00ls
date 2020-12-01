@@ -15,7 +15,7 @@
 
         #endregion Protected Fields
 
-        #region Public Constructors
+        #region Protected Constructors
 
         /// <summary>
         /// The Command Constructor
@@ -23,12 +23,12 @@
         /// <param name="receiver">
         /// Takes a Receiver object and upon construction uses it to fill the protected var
         /// </param>
-        public Command(Invoker receiver)
+        protected Command(Invoker receiver)
         {
             Receiver = receiver;
         }
 
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Methods
 
