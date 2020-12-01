@@ -17,7 +17,7 @@ namespace SManager.CoreLib.CommandFactory
 
         #endregion Protected Fields
 
-        #region Public Constructors
+        #region Protected Constructors
 
         /// <summary>
         /// The Command Constructor
@@ -25,12 +25,12 @@ namespace SManager.CoreLib.CommandFactory
         /// <param name="receiver">
         /// Takes a Receiver object and upon construction uses it to fill the protected var
         /// </param>
-        public Command(Receiver receiver)
+        protected Command(Receiver receiver)
         {
             Receiver = receiver;
         }
 
-        #endregion Public Constructors
+        #endregion Protected Constructors
 
         #region Public Methods
 

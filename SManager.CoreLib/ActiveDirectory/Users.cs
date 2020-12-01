@@ -9,14 +9,14 @@ namespace SManager.CoreLib.ActiveDirectory
     /// </summary>
     public static class Users
     {
-        #region Public Fields
+        #region Private Fields
 
         /// <summary>
         /// Departments
         /// </summary>
-        public static List<object> deps = new List<object>();
+        private static List<object> deps = new List<object>();
 
-        #endregion Public Fields
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -42,6 +42,8 @@ namespace SManager.CoreLib.ActiveDirectory
         /// The currently logged in User (in AD hopefullly)
         /// </summary>
         public static string CurrentUser { get; private set; }
+
+        public static List<object> Departments { get => deps; set => deps = value; }
 
         #endregion Public Properties
 

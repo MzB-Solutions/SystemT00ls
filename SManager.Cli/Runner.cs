@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using SManager.CoreLib.Configuration;
+﻿using SManager.CoreLib.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -29,8 +26,6 @@ namespace SManager.Cli
                 .AddEnvironmentVariables()
                 .Build().GetSection("Application"));
 
-            // add services: services.AddTransient<IMyRespository, MyConcreteRepository>();
-
             // add app
             _services.AddTransient<App>();
         }
@@ -47,8 +42,6 @@ namespace SManager.Cli
 
             // entry to run app
             await serviceProvider.GetService<App>().RunMe(args);
-            //new App().RunMe();
-            //Console.WriteLine(_appSettings.TempDirectory);
         }
 
         #endregion Private Methods

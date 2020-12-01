@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SManager.CoreLib
+﻿namespace SManager.CoreLib
 {
-    class Program
+    internal class Program
     {
     }
 }

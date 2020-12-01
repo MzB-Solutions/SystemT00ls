@@ -5,14 +5,11 @@
     /// </summary>
     public class Networking
     {
-        #region Public Fields
+        #region Private Fields
 
-        /// <summary>
-        /// an instance of a command receiver that listens to the invoke/execute commands
-        /// </summary>
-        public Receiver Receiver;
+        private Receiver receiver;
 
-        #endregion Public Fields
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -25,6 +22,11 @@
         /// This should either contain 'r'refresh or 'f'lushdns
         /// </summary>
         public static char WhatCommand { get; set; }
+
+        /// <summary>
+        /// an instance of a command receiver that listens to the invoke/execute commands
+        /// </summary>
+        public Receiver Receiver { get => receiver; set => receiver = value; }
 
         #endregion Public Properties
     }

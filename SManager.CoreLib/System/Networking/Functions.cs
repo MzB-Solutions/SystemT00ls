@@ -46,23 +46,23 @@ namespace SManager.CoreLib.System.Networking
                 {
                     process.Start();
                 }
-                catch (ObjectDisposedException e1)
+                catch (ObjectDisposedException myException)
                 {
-                    Networking.LogMessage = $"An Exception occured in [networking]: {e1.Message}";
+                    Networking.LogMessage = $"An Exception occured in [networking]: {myException.Message}";
                     _result = -1;
-                    throw e1;
+                    throw new Exception($"An Exception occured in [networking]: {myException.Message}", myException);
                 }
-                catch (InvalidOperationException e2)
+                catch (InvalidOperationException myException)
                 {
-                    Networking.LogMessage = $"An Exception occured in [networking]: {e2.Message}";
+                    Networking.LogMessage = $"An Exception occured in [networking]: {myException.Message}";
                     _result = -1;
-                    throw e2;
+                    throw new Exception($"An Exception occured in [networking]: {myException.Message}", myException);
                 }
-                catch (PlatformNotSupportedException e3)
+                catch (PlatformNotSupportedException myException)
                 {
-                    Networking.LogMessage = $"An Exception occured in [networking]: {e3.Message}";
+                    Networking.LogMessage = $"An Exception occured in [networking]: {myException.Message}";
                     _result = -1;
-                    throw e3;
+                    throw new Exception($"An Exception occured in [networking]: {myException.Message}", myException);
                 }
                 finally
                 {

@@ -1,7 +1,7 @@
 ﻿using EasyConsole;
+using SManager.CoreLib;
 using System;
 using System.Threading;
-using SManager.CoreLib;
 using static SManager.Cli.OurCursor;
 
 namespace SManager.Cli
@@ -106,7 +106,6 @@ namespace SManager.Cli
             {
                 // We're simply casting straight to a Console-color, since our enum is made of them
                 // anyways. (twice) I cannot see this going wrong :P
-                // TODO: might need to try-catch this a bit neater
                 Output.WriteLine((ConsoleColor)color, "{0}{1}", _prefix, _noticeText);
             }
             // reset our position to the start of the message (makes it look neater)
@@ -115,7 +114,7 @@ namespace SManager.Cli
             if (_cleanMe)
             {
                 // just making sure we're not passing in 0 as a value since then, there aint no
-                // message lulz
+                // message *lulz*
                 _length = IntTools.Clamp(_length, 1, 30);
                 // then sleep for _length seconds
                 Thread.Sleep(TimeSpan.FromSeconds(_length));
