@@ -1,6 +1,6 @@
 - name: Introduction
   href: intro.md
-- name: SystemT00ls UI
+- name: SManager UI
   href: ui.md
-- name: SystemT00ls cli
+- name: SManager cli
   href: cli.md

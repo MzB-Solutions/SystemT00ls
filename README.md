@@ -1,4 +1,4 @@
-# SystemT00ls
+# SManager
 Command Line based system tools to manage our workstations
 
 # Build Status

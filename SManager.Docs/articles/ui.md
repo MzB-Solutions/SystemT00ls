@@ -1,6 +1,6 @@
-﻿# SystemTools.UI Documentation
+﻿# SManager.UI Documentation
 
-This describes basic usage of SystemT00ls.UI
+This describes basic usage of SManager.UI
 
 ## Requirements
 

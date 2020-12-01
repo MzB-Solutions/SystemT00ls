@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>SystemT00ls.cli.Runner</StartupObject>
+    <StartupObject>SManager.cli.Runner</StartupObject>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <ApplicationIcon>avalonia-logo.ico</ApplicationIcon>
     <Version>20.11.87</Version>
@@ -12,11 +12,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\SystemT00ls.cli.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.cli\SManager.cli.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\SystemT00ls.cli.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.cli\SManager.cli.xml</DocumentationFile>
     <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -48,7 +48,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.cli\SystemT00ls.cli.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.cli\SManager.cli.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />

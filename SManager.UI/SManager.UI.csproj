@@ -2,20 +2,20 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>SystemT00ls.UI.Program</StartupObject>
+    <StartupObject>SManager.UI.Program</StartupObject>
     <Version>20.11.87</Version>
     <FileVersion>20.11.87</FileVersion>
     <AssemblyVersion>20.11.87</AssemblyVersion>
     <Configurations>Debug;Release;Documentation</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.UI\SystemT00ls.UI.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.UI\SManager.UI.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.UI\SystemT00ls.UI.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.UI\SManager.UI.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|AnyCPU'">
-    <DocumentationFile>C:\Users\smzb\source\repos\SystemT00ls\SystemT00ls.UI\SystemT00ls.UI.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.UI\SManager.UI.xml</DocumentationFile>
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>

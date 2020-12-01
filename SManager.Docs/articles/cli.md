@@ -1,6 +1,6 @@
-﻿# SystemTools.cli Documentation
+﻿# SManager.cli Documentation
 
-This describes basic usage of SystemT00ls.cli
+This describes basic usage of SManager.cli
 
 ## Requirements
 

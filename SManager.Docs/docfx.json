@@ -6,7 +6,7 @@
           "files": [
             "**.csproj"
           ],
-          "src": "C:\\Users\\smzb\\source\\repos\\SystemT00ls\\SystemT00ls.Docs"
+          "src": "C:\\Users\\smzb\\source\\repos\\SManager\\SManager.Docs"
         }
       ],
       "dest": "api",
