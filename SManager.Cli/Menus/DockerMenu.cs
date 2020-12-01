@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace SManager.cli.Menus
+namespace SManager.Cli.Menus
 {
     internal class DockerMenu : Page
     {

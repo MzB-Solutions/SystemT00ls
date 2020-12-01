@@ -1,22 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>SManager.cli.Runner</StartupObject>
+    <StartupObject>SManager.Cli.Runner</StartupObject>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <ApplicationIcon>avalonia-logo.ico</ApplicationIcon>
-    <Version>20.11.87</Version>
-    <FileVersion>20.11.87</FileVersion>
-    <AssemblyVersion>20.11.87</AssemblyVersion>
+    <Version>20.12.101</Version>
+    <FileVersion>20.12.101</FileVersion>
+    <AssemblyVersion>20.12.101</AssemblyVersion>
     <Configurations>Debug;Release;Documentation</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.cli\SManager.cli.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.Cli\SManager.Cli.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Documentation|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.cli\SManager.cli.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.Cli\SManager.Cli.xml</DocumentationFile>
     <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -48,7 +48,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.cli\SManager.cli.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\smzb\source\repos\SManager\SManager.Cli\SManager.Cli.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />

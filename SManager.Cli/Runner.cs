@@ -5,7 +5,7 @@ using SManager.CoreLib.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SManager.cli
+namespace SManager.Cli
 {
     internal class Runner
     {

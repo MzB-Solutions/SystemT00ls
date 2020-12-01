@@ -6,9 +6,9 @@
     <RootNamespace>SManager.CoreLib</RootNamespace>
     <ApplicationIcon>
     </ApplicationIcon>
-    <Version>20.11.87</Version>
-    <FileVersion>20.11.87</FileVersion>
-    <AssemblyVersion>20.11.87</AssemblyVersion>
+    <Version>20.12.101</Version>
+    <FileVersion>20.12.101</FileVersion>
+    <AssemblyVersion>20.12.101</AssemblyVersion>
     <Configurations>Debug;Release;Documentation</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

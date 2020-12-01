@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using SManager.CoreLib.System.Power;
 
-namespace SManager.cli.Menus
+namespace SManager.Cli.Menus
 {
     internal class ComputerMenu : MenuPage
     {

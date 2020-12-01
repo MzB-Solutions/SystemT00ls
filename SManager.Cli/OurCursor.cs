@@ -1,4 +1,4 @@
-﻿namespace SManager.cli
+﻿namespace SManager.Cli
 {
     internal class OurCursor
     {

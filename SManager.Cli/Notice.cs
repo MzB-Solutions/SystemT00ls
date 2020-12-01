@@ -2,9 +2,9 @@
 using System;
 using System.Threading;
 using SManager.CoreLib;
-using static SManager.cli.OurCursor;
+using static SManager.Cli.OurCursor;
 
-namespace SManager.cli
+namespace SManager.Cli
 {
     /// <summary>
     /// This generates a notice (upon construction) the displays 2 lines from the bottom

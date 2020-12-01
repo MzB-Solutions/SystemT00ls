@@ -1,14 +1,14 @@
 ﻿using EasyConsole;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SManager.cli.Menus;
+using SManager.Cli.Menus;
 using SManager.CoreLib.ActiveDirectory;
 using SManager.CoreLib.Configuration;
 using System;
 using System.Threading.Tasks;
-using static SManager.cli.Notice;
+using static SManager.Cli.Notice;
 
-namespace SManager.cli
+namespace SManager.Cli
 {
     internal class App : Program
     {

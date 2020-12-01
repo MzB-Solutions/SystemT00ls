@@ -1,6 +1,6 @@
-﻿# SManager.cli Documentation
+﻿# SManager.Cli Documentation
 
-This describes basic usage of SManager.cli
+This describes basic usage of SManager.Cli
 
 ## Requirements
 
