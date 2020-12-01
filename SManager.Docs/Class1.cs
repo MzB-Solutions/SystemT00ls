@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SystemT00ls.Docs
+namespace SManager.Docs
 {
     public class Class1
     {

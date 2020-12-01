@@ -1,9 +1,9 @@
 ﻿using EasyConsole;
 using Microsoft.Extensions.Logging;
 using System;
-using SystemT00ls.CoreLib.System.Networking;
+using SManager.CoreLib.System.Networking;
 
-namespace SystemT00ls.cli.Menus
+namespace SManager.cli.Menus
 {
     internal class NetworkingMenu : MenuPage
     {

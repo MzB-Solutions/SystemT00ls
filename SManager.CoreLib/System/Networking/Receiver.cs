@@ -1,4 +1,4 @@
-﻿namespace SystemT00ls.CoreLib.System.Networking
+﻿namespace SManager.CoreLib.System.Networking
 {
     /// <summary>
     /// A concrete implementation of a Receiver for the CommandFactory

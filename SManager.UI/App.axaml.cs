@@ -1,10 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using SystemT00ls.UI.ViewModels;
-using SystemT00ls.UI.Views;
+using SManager.UI.ViewModels;
+using SManager.UI.Views;
 
-namespace SystemT00ls.UI
+namespace SManager.UI
 {
     /// <summary>
     /// Avalonia Bootstrap

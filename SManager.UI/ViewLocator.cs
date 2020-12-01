@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using System;
-using SystemT00ls.UI.ViewModels;
+using SManager.UI.ViewModels;
 
-namespace SystemT00ls.UI
+namespace SManager.UI
 {
     /// <summary>
     /// A simple ViewLocator four or MVVM implementation

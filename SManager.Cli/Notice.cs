@@ -1,10 +1,10 @@
 ﻿using EasyConsole;
 using System;
 using System.Threading;
-using SystemT00ls.CoreLib;
-using static SystemT00ls.cli.OurCursor;
+using SManager.CoreLib;
+using static SManager.cli.OurCursor;
 
-namespace SystemT00ls.cli
+namespace SManager.cli
 {
     /// <summary>
     /// This generates a notice (upon construction) the displays 2 lines from the bottom

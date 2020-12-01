@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SystemT00ls.CoreLib.System.Power
+namespace SManager.CoreLib.System.Power
 {
     /// <summary>
     /// An LUID is a 64-bit value guaranteed to be unique only on the system on which it was

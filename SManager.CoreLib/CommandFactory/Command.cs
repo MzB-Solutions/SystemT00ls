@@ -1,6 +1,6 @@
-﻿using SystemT00ls.CoreLib.System.Networking;
+﻿using SManager.CoreLib.System.Networking;
 
-namespace SystemT00ls.CoreLib.CommandFactory
+namespace SManager.CoreLib.CommandFactory
 {
     /// <summary>
     /// All commands should be based of this class

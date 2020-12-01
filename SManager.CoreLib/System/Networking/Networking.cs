@@ -1,4 +1,4 @@
-﻿namespace SystemT00ls.CoreLib.System.Networking
+﻿namespace SManager.CoreLib.System.Networking
 {
     /// <summary>
     /// a simple stack of networking functions

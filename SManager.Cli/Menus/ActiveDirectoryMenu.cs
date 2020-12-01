@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace SystemT00ls.cli.Menus
+namespace SManager.cli.Menus
 {
     internal class ActiveDirectoryMenu : Page
     {

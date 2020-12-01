@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace SystemT00ls.UI.ViewModels
+namespace SManager.UI.ViewModels
 {
     /// <summary>
     /// All our ViewModels should inherit this base class!!!

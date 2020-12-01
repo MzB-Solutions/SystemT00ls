@@ -1,4 +1,4 @@
-﻿namespace SystemT00ls.UI.ViewModels
+﻿namespace SManager.UI.ViewModels
 {
     /// <summary>
     /// The ViewModel for our initial MainWindow

@@ -1,6 +1,6 @@
-﻿using SystemT00ls.CoreLib.CommandFactory;
+﻿using SManager.CoreLib.CommandFactory;
 
-namespace SystemT00ls.CoreLib.System.Networking
+namespace SManager.CoreLib.System.Networking
 {
     internal class Commands : Command
     {

@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
-using SystemT00ls.CoreLib.Configuration;
+using SManager.CoreLib.Configuration;
 
-namespace SystemT00ls.cli
+namespace SManager.cli
 {
     internal class Runner
     {

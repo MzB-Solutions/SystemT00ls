@@ -2,7 +2,7 @@
 using Avalonia.Logging.Serilog;
 using Avalonia.ReactiveUI;
 
-namespace SystemT00ls.UI
+namespace SManager.UI
 {
     internal class Program
     {

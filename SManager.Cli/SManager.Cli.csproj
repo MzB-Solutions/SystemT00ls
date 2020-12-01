@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EasyConsole.Core\EasyConsole.Core\EasyConsole.Core.csproj" />
-    <ProjectReference Include="..\SystemT00ls.CoreLib\SManager.CoreLib.csproj" />
+    <ProjectReference Include="..\SManager.CoreLib\SManager.CoreLib.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">

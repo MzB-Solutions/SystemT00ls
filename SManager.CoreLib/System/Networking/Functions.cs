@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SystemT00ls.CoreLib.System.Networking
+namespace SManager.CoreLib.System.Networking
 {
     /// <summary>
     /// A simple networking stack, that allows us to run some rudementary functions on Windows'

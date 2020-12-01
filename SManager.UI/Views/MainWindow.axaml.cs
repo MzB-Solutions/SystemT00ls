@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace SystemT00ls.UI.Views
+namespace SManager.UI.Views
 {
     /// <summary>
     /// The backend loader for the avalonia type xaml files.

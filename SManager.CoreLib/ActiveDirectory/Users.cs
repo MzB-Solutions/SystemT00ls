@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
 
-namespace SystemT00ls.CoreLib.ActiveDirectory
+namespace SManager.CoreLib.ActiveDirectory
 {
     /// <summary>
     /// A simple AD query to grab some stuff

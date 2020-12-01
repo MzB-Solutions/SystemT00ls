@@ -2,14 +2,14 @@
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace SystemT00ls.cli.Menus
+namespace SManager.cli.Menus
 {
     internal class MainMenu : MenuPage
     {
         #region Public Constructors
 
         public MainMenu(Program program, ILogger<App> logger)
-            : base("SystemT00ls", program,
+            : base("SManager", program,
                   new Option("Active Directory", () => program.NavigateTo<ActiveDirectoryMenu>()),
                   new Option("Docker4Windows", () => program.NavigateTo<DockerMenu>()),
                   new Option("Computer Behaviour", () => program.NavigateTo<ComputerMenu>()),

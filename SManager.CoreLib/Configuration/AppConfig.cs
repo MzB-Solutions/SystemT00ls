@@ -1,4 +1,4 @@
-﻿namespace SystemT00ls.CoreLib.Configuration
+﻿namespace SManager.CoreLib.Configuration
 {
     /// <summary>
     /// A simple Application Configuration with just 2 fields
