@@ -20,10 +20,10 @@ namespace SystemT00ls.cli.Menus
                   {
                       Functions StackInstance = new Functions();
                       uint returnCode = StackInstance.FlushDNSCache();
-                      logger.LogDebug($"#{DateTime.Now}#: FLushing the DNS resolvers resulted in the following return code: {returnCode}");
+                      logger.LogDebug($"#{DateTime.Now}#: Flushing the DNS resolvers resulted in the following return code: {returnCode}");
                       logger.LogDebug(Networking.LogMessage);
 #if DEBUG
-                      logger.LogCritical($"#{DateTime.Now}#: FLushing the DNS resolvers resulted in the following return code: {returnCode}");
+                      logger.LogCritical($"#{DateTime.Now}#: Flushing the DNS resolvers resulted in the following return code: {returnCode}");
                       logger.LogCritical(Networking.LogMessage);
 #endif
                       program.NavigateTo<NetworkingMenu>();
