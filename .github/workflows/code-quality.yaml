@@ -19,8 +19,9 @@ jobs:
     ## THIS SHOULD NOT SURVIVE #9
     - name: Show Env Vars quick and dirty
       shell: powershell
-      run: write-host "$env:LOCALAPPDATA"
-      run: write-host "$env:*"
+      run: |
+      write-host "$env:LOCALAPPDATA"
+      write-host "$env:*"
     ## THIS SHOULD NOT SURVIVE #9
     - name: Hide sonar-project.properties
       shell: powershell
