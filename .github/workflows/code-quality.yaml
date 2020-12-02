@@ -60,3 +60,10 @@ jobs:
     - name: unhide sonar-project.properties
       shell: powershell
       run: mv sonar-project.old sonar-project.properties
+    - name: Notify of Build final status
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORDBUILDSBOT }}
+        status: ${{ job.status }}
+        username: MzB Build Notifications
