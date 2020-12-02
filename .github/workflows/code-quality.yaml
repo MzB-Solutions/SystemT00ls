@@ -18,9 +18,7 @@ jobs:
         submodules: recursive
     - name: Hide sonar-project.properties
       shell: powershell
-      run: |
-        Get-ChildItem env:*
-        mv sonar-project.properties sonar-project.old
+      run: mv sonar-project.properties sonar-project.old
     - uses: actions/setup-java@v1
       with:
         java-version: '11' # The JDK version to make available on the path.
@@ -44,7 +42,7 @@ jobs:
       id: cache-dotnet-5
       uses: actions/cache@v2
       with:
-        path: ${{ env.LOCALAPPDATA }}/Microsoft/dotnet
+        path: "{$env.LOCALAPPDATA}/Microsoft/dotnet"
         key: ${{ runnner.os }}-dotnet5
     - name: Cache NuGet
       id: cache-nuget
