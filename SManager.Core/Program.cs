@@ -1,10 +1,10 @@
 ﻿namespace SManager.Core
 {
-    public class Core
+    public class Program
     {
         #region Public Constructors
 
-        public Core()
+        public Program()
         {
         }
 
