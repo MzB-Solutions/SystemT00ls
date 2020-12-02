@@ -47,7 +47,7 @@ jobs:
       id: cache-dotnet-5
       uses: actions/cache@v1
       with:
-        key: ${{ runnner.os }}-dotnet
+        key: ${{ runner.os }}-dotnet
         path: ${{ env.LOCALAPPDATA }}\Microsoft\dotnet
     - name: Cache NuGet
       id: cache-nuget
