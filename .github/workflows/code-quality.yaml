@@ -18,7 +18,9 @@ jobs:
         username: MzB Build Notifications
     - name: Install dotnet 5.0
       shell: powershell
-      run: &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1'))) --channel 5.0
+      run: |
+        (new-object net.webclient).DownloadFile('https://dot.net/v1/dotnet-install.ps1','localInstaller.ps1')
+        ./localInstaller.ps1 --channel 5.0
     - uses: actions/checkout@v2
       with:
         submodules: recursive
