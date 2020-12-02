@@ -20,7 +20,7 @@ jobs:
     - name: Hide sonar-project.properties
       shell: powershell
       run: |
-        Get-ChildItem env:
+        Get-ChildItem env:*
         mv sonar-project.properties sonar-project.old
     - uses: actions/setup-java@v1
       with:
