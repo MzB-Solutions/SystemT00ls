@@ -45,17 +45,15 @@ jobs:
         restore-keys: ${{ runner.os }}-sonar-scanner
     - name: Cache Dotnet 5.0
       id: cache-dotnet-5
-      env:
-        DOTNET_LOCATION: ${{ env.LOCALAPPDATA }}/Microsoft/dotnet
-      uses: actions/cache@v2
+      uses: actions/cache@v1
       with:
-        path: ${{ env.DOTNET_LOCATION }}
         key: ${{ runnner.os }}-dotnet5
+        path: ${{ **env.LOCALAPPDATA** }}\Microsoft\dotnet
     - name: Cache NuGet
       id: cache-nuget
       uses: actions/cache@v2
       with:
-        path: ${{ github.workspace }}/.nuget/packages
+        path: ${{ github.workspace }}\.nuget\packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
