@@ -17,10 +17,9 @@ jobs:
         status: ${{ job.status }}
         username: MzB Build Notifications
     - name: Install dotnet 5.0
-      shell: powershell
-      run: |
-        (new-object net.webclient).DownloadFile('https://dot.net/v1/dotnet-install.ps1','localInstaller.ps1')
-        ./localInstaller.ps1 --channel 5.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
     - uses: actions/checkout@v2
       with:
         submodules: recursive
@@ -68,6 +67,7 @@ jobs:
       run: |
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build --configuration Debug --no-restore -v n
+        dotnet test --no-restore -v n
         ./.sonar/scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     - name: unhide sonar-project.properties
       shell: powershell
