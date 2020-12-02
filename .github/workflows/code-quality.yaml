@@ -38,18 +38,10 @@ jobs:
         restore-keys: ${{ runner.os }}-sonar-scanner
     - name: Cache Dotnet 5.0
       id: cache-dotnet-5
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         key: ${{ runner.os }}-dotnet
         path: ${{ env.LOCALAPPDATA }}\Microsoft\dotnet
-    - name: Cache NuGet
-      id: cache-nuget
-      uses: actions/cache@v2
-      with:
-        path: ${{ github.workspace }}\.nuget\packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
     - name: Install dotnet 5.0
       if: steps.cache-dotnet-5.outputs.cache-hit != 'true'
       uses: actions/setup-dotnet@v1
@@ -61,19 +53,17 @@ jobs:
       run: |
         New-Item -Path ./.sonar/scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
-    - name: Install dependencies
-      if: steps.cache-nuget.outputs.cache-hit != 'true'
-      run: dotnet restore -v n
     - name: Build and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="./Tests/**/*.xml"
+        dotnet restore -v n
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --logger:nunit --no-restore -v n
-        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.nunit.reportsPaths="./Tests/**/*.xml"
+        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
       uses: MirrorNG/nunit-reporter@v1.0.9
