@@ -16,6 +16,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
+    - name: Show Env Vars quick and dirty
+      shell: powershell
+      run: write-host "$env:LOCALAPPDATA"
     - name: Hide sonar-project.properties
       shell: powershell
       run: mv sonar-project.properties sonar-project.old
@@ -44,7 +47,7 @@ jobs:
         DOTNET_LOCATION: ${{ env.LOCALAPPDATA }}/Microsoft/dotnet
       uses: actions/cache@v2
       with:
-        path: ${{ env.DOTNET_LOCATION }}
+        path: ${{ **env.DOTNET_LOCATION** }}
         key: ${{ runnner.os }}-dotnet5
     - name: Cache NuGet
       id: cache-nuget
