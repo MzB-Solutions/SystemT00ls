@@ -16,6 +16,9 @@ jobs:
         webhook: ${{ secrets.DISCORDBUILDSBOT }}
         status: ${{ job.status }}
         username: MzB Build Notifications
+    - name: Install dotnet 5.0
+      shell: powershell
+      run: &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1'))) --channel 5.0
     - uses: actions/checkout@v2
       with:
         submodules: recursive
@@ -28,24 +31,31 @@ jobs:
         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
         architecture: x64 # (x64 or x86) - defaults to x64
     - name: Cache SonarCloud packages
-      uses: actions/cache@v1
+      id: cache-sonar-packages
+      uses: actions/cache@v2
       with:
-        path: ~\.sonar\cache
+        path: ~/.sonar/cache
         key: ${{ runner.os }}-sonar-cache
         restore-keys: ${{ runner.os }}-sonar-cache
     - name: Cache SonarCloud scanner
       id: cache-sonar-scanner
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
-        path: .\.sonar\scanner
+        path: ./.sonar/scanner
         key: ${{ runner.os }}-sonar-scanner
         restore-keys: ${{ runner.os }}-sonar-scanner
+    - name: Cache Dotnet 5.0
+      id: cache-dotnet-5
+      uses: actions/cache@v2
+      with:
+        path: $LocalAppData/Microsoft/dotnet
+        key: ${{ runnner.os }}-dotnet5
     - name: Install SonarCloud scanner
       if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
       shell: powershell
       run: |
-        New-Item -Path .\.sonar\scanner -ItemType Directory
-        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+        New-Item -Path ./.sonar/scanner -ItemType Directory
+        dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
     - name: Install dependencies
       run: dotnet restore -v n
     - name: Build and analyze
@@ -54,13 +64,13 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build --configuration Debug --no-restore -v n
-        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        ./.sonar/scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     - name: unhide sonar-project.properties
       shell: powershell
       run: mv sonar-project.old sonar-project.properties
-    - name: Notify of Build final status
+    - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
       if: always()
       with:
