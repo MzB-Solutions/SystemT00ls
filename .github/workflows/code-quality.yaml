@@ -10,6 +10,7 @@ jobs:
     runs-on: windows-latest
     env:
       DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
     steps:
     - name: Install dotnet 5.0
       uses: actions/setup-dotnet@v1
