@@ -11,7 +11,7 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
-      DOTNET_LOCATION: "{$LOCALAPPDATA}/Microsoft/dotnet"
+      DOTNET_LOCATION: ${{ env.LOCALAPPDATA }}/Microsoft/dotnet
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
     steps:
     - uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
       id: cache-dotnet-5
       uses: actions/cache@v2
       with:
-        path: ${{ DOTNET_LOCATION }}
+        path: ${{ env.DOTNET_LOCATION }}
         key: ${{ runnner.os }}-dotnet5
     - name: Cache NuGet
       id: cache-nuget
