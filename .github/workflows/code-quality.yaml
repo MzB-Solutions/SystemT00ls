@@ -11,11 +11,8 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
     steps:
-    - name: Install dotnet 5.0
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '5.0.x'
     - uses: actions/checkout@v2
       with:
         submodules: recursive
@@ -45,8 +42,21 @@ jobs:
       id: cache-dotnet-5
       uses: actions/cache@v2
       with:
-        path: $LocalAppData/Microsoft/dotnet
+        path: ${{ LocalAppData }}/Microsoft/dotnet
         key: ${{ runnner.os }}-dotnet5
+    - name: Cache NuGet
+      id: cache-nuget
+      uses: actions/cache@v2
+      with:
+        path: ${{ github.workspace }}/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    - name: Install dotnet 5.0
+      if: steps.cache-dotnet-5.outputs.cache-hit != 'true'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
     - name: Install SonarCloud scanner
       if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
       shell: powershell
@@ -54,6 +64,7 @@ jobs:
         New-Item -Path ./.sonar/scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
     - name: Install dependencies
+      if: steps.cache-nuget.outputs.cache-hit != 'true'
       run: dotnet restore -v n
     - name: Build and analyze
       env:
