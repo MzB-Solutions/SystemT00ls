@@ -70,10 +70,10 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="./Tests/**/*.xml"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --logger:nunit --no-restore -v n
-        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.nunit.reportsPaths="./Tests/**/*.xml"
       if: ${{ always() }}
     - name: NUnit Reporter
       uses: MirrorNG/nunit-reporter@v1.0.9
