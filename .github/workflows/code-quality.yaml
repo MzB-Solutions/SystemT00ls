@@ -79,6 +79,7 @@ jobs:
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --no-restore -v n
         ./.sonar/scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      if: ${{ always() }}
     - name: unhide sonar-project.properties
       shell: powershell
       run: mv sonar-project.old sonar-project.properties
