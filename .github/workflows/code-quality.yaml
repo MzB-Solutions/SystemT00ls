@@ -15,15 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
+        fetch-depth: 0
         submodules: recursive
-    ## THIS SHOULD NOT SURVIVE #9
-    - name: Show Env Vars quick and dirty
-      shell: powershell
-      run: write-host "$env:LOCALAPPDATA"
-    ## THIS SHOULD NOT SURVIVE #9
-    - name: Hide sonar-project.properties
-      shell: powershell
-      run: mv sonar-project.properties sonar-project.old
     - uses: actions/setup-java@v1
       with:
         java-version: '11' # The JDK version to make available on the path.
@@ -79,12 +72,15 @@ jobs:
       run: |
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build --configuration Debug --no-restore -v n
-        dotnet test --no-restore -v n
-        ./.sonar/scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        dotnet test --logger:nunit --no-restore -v n
+        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
-    - name: unhide sonar-project.properties
-      shell: powershell
-      run: mv sonar-project.old sonar-project.properties
+    - name: NUnit Reporter
+      uses: MirrorNG/nunit-reporter@v1.0.9
+      if: always()
+      with:
+        path: Tests/**/*.xml
+        access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
       if: always()
