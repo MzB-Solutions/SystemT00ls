@@ -6,11 +6,11 @@ namespace Test.SManager.Core
     [TestFixture()]
     public class IntToolsTestSuite
     {
-        #region Private Properties
+        #region Private Fields
 
-        private int _resultOfClamp { get; set; }
+        private int _resultOfClamp;
 
-        #endregion Private Properties
+        #endregion Private Fields
 
         #region Public Methods
 
@@ -33,7 +33,7 @@ namespace Test.SManager.Core
         [Test()]
         public void Clamp_ReturnException()
         {
-            Assert.Throws(Is.TypeOf<System.ArgumentOutOfRangeException>(), () => IntTools.Clamp(3, 5, 1));
+            Assert.Throws(Is.TypeOf<System.ArithmeticException>(), () => IntTools.Clamp(3, 5, 1));
         }
 
         [SetUp()]
