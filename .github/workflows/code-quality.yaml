@@ -59,7 +59,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="./TestResults/*.trx"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths="./TestResults/*.trx"
         dotnet restore -v n
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --logger "trx;LogFileName=TestResults.trx" --collect:"Code Coverage"
@@ -69,7 +69,7 @@ jobs:
       uses: MirrorNG/nunit-reporter@v1.0.9
       if: always()
       with:
-        path: TestResults/*.trx
+        path: TestResults/*.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
