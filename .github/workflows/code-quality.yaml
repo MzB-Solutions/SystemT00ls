@@ -64,13 +64,14 @@ jobs:
         dotnet build --configuration Release --no-restore -v n
         ##dotnet test --configuration Release --logger:nunit -v n
         dotnet test
+        nunit-console ./SManager.Core.Tests/bin/Release/net5.0/ /xml=nunit-result.xml
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
       uses: MirrorNG/nunit-reporter@v1.0.9
       if: always()
       with:
-        path: Tests/**/*.xml
+        path: '*.Tests/nunit-result.xml'
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1

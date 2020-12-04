@@ -1,0 +1,8 @@
+{
+  "Version": 1,
+  "FileNameTemplate": "$ClassName$Tests",
+  "CustomMockFieldDeclarationTemplate": "private $CustomMockClass$ mock$InterfaceMockName$;",
+  "CustomMockFieldInitializationTemplate": "this.mock$InterfaceMockName$ = new $CustomMockClass$();",
+  "CustomMockObjectReferenceTemplate": "this.mock$InterfaceMockName$",
+  "Templates": {}
+}
