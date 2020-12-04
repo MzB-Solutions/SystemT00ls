@@ -62,7 +62,8 @@ jobs:
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="./Tests/**/*.xml"
         dotnet restore -v n
         dotnet build --configuration Release --no-restore -v n
-        dotnet test --configuration Release --logger:nunit -v n
+        ##dotnet test --configuration Release --logger:nunit -v n
+        dotnet test --test-adapter-path:. --logger:"nunit"
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
