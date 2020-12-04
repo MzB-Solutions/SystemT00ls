@@ -36,6 +36,13 @@ jobs:
         path: ./.sonar/scanner
         key: ${{ runner.os }}-sonar-scanner
         restore-keys: ${{ runner.os }}-sonar-scanner
+    - name: Cache nunit-runner
+      id: cache-nunit-runner
+      uses: actions/cache@v2
+      with:
+        path: ./.nunit/runner
+        key: ${{ runner.os }}-nunit-runner
+        restore-keys: ${{ runner.os }}-nunit-runner
     - name: Cache Dotnet 5.0
       id: cache-dotnet-5
       uses: actions/cache@v2
@@ -53,6 +60,12 @@ jobs:
       run: |
         New-Item -Path ./.sonar/scanner -ItemType Directory
         dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+    - name: Install nunit3 runner
+      if: steps.cache-nunit-runner.outputs.cache-hit != 'true'
+      shell: powershell
+      run: |
+        New-Item -Path ./.nunit/runner -ItemType Directory
+        dotnet tool update nunit.runner --tool-path ./.nunit/runner
     - name: Build and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -64,14 +77,14 @@ jobs:
         dotnet build --configuration Release --no-restore -v n
         ##dotnet test --configuration Release --logger:nunit -v n
         dotnet test
-        nunit-console ./SManager.Core.Tests/bin/Release/net5.0/ /xml=nunit-result.xml
+        ./nunit/runner/nunit.runner ./SManager.Core.Tests/bin/Release/net5.0/SManager.Core.Tests.dll /xml=nunit-result.xml
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
       uses: MirrorNG/nunit-reporter@v1.0.9
       if: always()
       with:
-        path: '*.Tests/nunit-result.xml'
+        path: nunit-result.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
