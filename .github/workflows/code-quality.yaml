@@ -69,7 +69,7 @@ jobs:
       uses: MirrorNG/nunit-reporter@v1.0.9
       if: always()
       with:
-        path: TestResults/TestResults.trx
+        path: TestResults/*.trx
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
