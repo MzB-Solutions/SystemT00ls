@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SManager.Core", "SManager.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyConsole", "External\EasyConsole\EasyConsole.csproj", "{98F72DB8-6E08-4E6E-A919-8BCE603B4605}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SManager.Tests.Core.IntTools", "Tests\SManager.Tests.Core.IntTools\SManager.Tests.Core.IntTools.csproj", "{F57B4A49-2E8F-4CCB-8F0E-9F8A16933E59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.SManager.Core", "Tests\SManager.Tests.Core\Tests.SManager.Core.csproj", "{4FA18A42-493D-4DB2-A5E1-42AF2E68F6DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{98F72DB8-6E08-4E6E-A919-8BCE603B4605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98F72DB8-6E08-4E6E-A919-8BCE603B4605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98F72DB8-6E08-4E6E-A919-8BCE603B4605}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F57B4A49-2E8F-4CCB-8F0E-9F8A16933E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F57B4A49-2E8F-4CCB-8F0E-9F8A16933E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F57B4A49-2E8F-4CCB-8F0E-9F8A16933E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F57B4A49-2E8F-4CCB-8F0E-9F8A16933E59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA18A42-493D-4DB2-A5E1-42AF2E68F6DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA18A42-493D-4DB2-A5E1-42AF2E68F6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA18A42-493D-4DB2-A5E1-42AF2E68F6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA18A42-493D-4DB2-A5E1-42AF2E68F6DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

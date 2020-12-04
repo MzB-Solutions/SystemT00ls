@@ -23,6 +23,10 @@ namespace SManager.Core
         /// </returns>
         public static T Clamp<T>(T value, T min, T max) where T : notnull, IComparable<T>
         {
+            if (min.CompareTo(max) > 0)
+            {
+                throw new ArgumentOutOfRangeException("Min-Value cannot be greater than Max-Value");
+            }
             if (value.CompareTo(min) < 0)
             {
                 return min;
