@@ -77,7 +77,7 @@ jobs:
         dotnet build --configuration Release --no-restore -v n
         ##dotnet test --configuration Release --logger:nunit -v n
         dotnet test
-        ./.nunit/runner/nunit.runner ./SManager.Core.Tests/bin/Release/net5.0/SManager.Core.Tests.dll --output nunit-result.xml
+        ./.nunit/runner/nunit.runner ./SManager.Core.Tests/SManager.Core.Tests.nunit --output nunit-result.xml
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
