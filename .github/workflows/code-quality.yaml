@@ -8,6 +8,9 @@ on:
 jobs:
   code-quality-sonarcloud:
     runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
     steps:
     - uses: actions/setup-java@v1
       with:
@@ -16,7 +19,23 @@ jobs:
         architecture: x64 # (x64 or x86) - defaults to x64
     - uses: actions/checkout@v2
       with:
+        fetch-depth: 0
         submodules: recursive
+    - name: Install dotnet 5.0
+      if: steps.cache-dotnet-5.outputs.cache-hit != 'true'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    - name: Build and analyze
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      shell: powershell
+      run: |
+        dotnet restore -v n
+        dotnet build --configuration Debug --no-restore -v n
+        dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml"
+      if: ${{ always() }}
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
