@@ -12,6 +12,7 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+      SMANAGER_VERSION: v20.12.123 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
     steps:
     - uses: actions/checkout@v2
       with:
@@ -27,28 +28,28 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ github.workspace }}/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-nuget-
+          ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-nuget-
     - name: Cache SonarCloud packages
       id: cache-sonar-packages
       uses: actions/cache@v2
       with:
         path: ~/.sonar/cache
-        key: ${{ runner.os }}-sonar-cache
-        restore-keys: ${{ runner.os }}-sonar-cache
+        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-cache
+        restore-keys: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-cache
     - name: Cache SonarCloud scanner
       id: cache-sonar-scanner
       uses: actions/cache@v2
       with:
         path: ./.sonar/scanner
-        key: ${{ runner.os }}-sonar-scanner
-        restore-keys: ${{ runner.os }}-sonar-scanner
+        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-scanner
+        restore-keys: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-scanner
     - name: Cache Dotnet 5.0
       id: cache-dotnet-5
       uses: actions/cache@v2
       with:
-        key: ${{ runner.os }}-dotnet
+        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-dotnet
         path: ${{ env.LOCALAPPDATA }}\Microsoft\dotnet
     - name: Install dotnet 5.0
       if: steps.cache-dotnet-5.outputs.cache-hit != 'true'
@@ -79,7 +80,7 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
-        reports: 'nunit-result.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: 'coverage/nunit-result.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'lcov'
     - name: NUnit Reporter

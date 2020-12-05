@@ -4,6 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <Version>20.12.123</Version>
+
+    <FileVersion>20.12.123</FileVersion>
+
+    <AssemblyVersion>20.12.123</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
