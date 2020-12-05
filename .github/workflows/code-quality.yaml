@@ -83,6 +83,10 @@ jobs:
           coverage/*.xml
           SManager.Core.Tests/test-result.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
       if: always()
