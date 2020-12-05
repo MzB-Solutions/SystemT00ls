@@ -22,6 +22,14 @@ jobs:
         java-version: '11' # The JDK version to make available on the path.
         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
         architecture: x64 # (x64 or x86) - defaults to x64
+    - name: Cache NuGet Packages
+      id: cache-nuget
+      uses: actions/cache@v2
+      with:
+        path: ${{ github.workspace }}/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
     - name: Cache SonarCloud packages
       id: cache-sonar-packages
       uses: actions/cache@v2
@@ -59,7 +67,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="./*.Tests/*.xml"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="*.Tests/test-result.xml"
         dotnet restore -v n
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml"
@@ -70,7 +78,7 @@ jobs:
       if: always()
       with:
         path: |
-          "*.Tests/test-result.xml"
+          SManager.Core.Tests/test-result.xml"
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
