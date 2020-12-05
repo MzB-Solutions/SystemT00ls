@@ -1,0 +1,3 @@
+[submodule "vendor/EasyConsole"]
+	path = vendor/EasyConsole
+	url = https://github.com/MzB-Solutions/EasyConsole.git
