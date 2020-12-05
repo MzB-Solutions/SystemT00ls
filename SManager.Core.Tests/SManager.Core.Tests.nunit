@@ -1,6 +1,0 @@
-﻿﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Default" binpathtype="Auto">
-    <assembly path="SManager.Core.Tests.dll" />
-  </Config>
-</NUnitProject>
