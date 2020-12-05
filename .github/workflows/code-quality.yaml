@@ -67,10 +67,12 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
+        dotnet tool install -g dotnet-testx
         dotnet restore -v n
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="**.Tests/test-result.xml"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.it.reportsPaths=coverage/*.xml /d:sonar.cs.nunit.reportsPaths="**.Tests/test-result.xml"
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml"
+        dotnet testx --project all
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
@@ -78,7 +80,8 @@ jobs:
       if: always()
       with:
         path: |
-          SManager.Core.Tests/test-result.xml"
+          coverage/*.xml
+          SManager.Core.Tests/test-result.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
