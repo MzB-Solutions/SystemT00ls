@@ -16,7 +16,6 @@
     <PackageReference Include="NunitXml.TestLogger" Version="2.1.80" />
     <PackageReference Include="OpenCover" Version="4.7.922" />
     <PackageReference Include="OpenCoverToCoberturaConverter" Version="0.3.4" />
-    <PackageReference Include="ReportGenerator" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
