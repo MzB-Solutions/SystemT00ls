@@ -77,19 +77,19 @@ jobs:
         dotnet testx --project all
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
+    - name: NUnit Reporter
+      uses: MirrorNG/nunit-reporter@v1.0.9
+      if: always()
+      with:
+        path: |
+          ./coverage/nunit-result.xml
+        access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
         reports: 'coverage/nunit-result.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'lcov'
-    - name: NUnit Reporter
-      uses: MirrorNG/nunit-reporter@v1.0.9
-      if: always()
-      with:
-        path: |
-          coverage/*.xml
-        access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
