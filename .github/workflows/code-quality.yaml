@@ -6,45 +6,7 @@ on:
     branches: [ master,dev ]
     types: [opened, synchronize, reopened]
 jobs:
-  code-quality-sonarcloud:
-    runs-on: ubuntu-latest
-    env:
-      DOTNET_NOLOGO: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-    steps:
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '12' # The JDK version to make available on the path.
-        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-        architecture: x64 # (x64 or x86) - defaults to x64
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        submodules: recursive
-    - name: Install dotnet 5.0
-      if: steps.cache-dotnet-5.outputs.cache-hit != 'true'
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '5.0.x'
-    - name: Build and analyze
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      shell: bash
-      run: |
-        dotnet restore -v n
-        dotnet build --configuration Debug --no-restore -v n
-        dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml"
-      if: ${{ always() }}
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      with:
-        args: >
-          -Dsonar.verbose=true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  code-quality-local:
+  sonarcloud-local:
     runs-on: windows-latest
     env:
       DOTNET_NOLOGO: true
@@ -105,13 +67,11 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        mv sonar-project.properties sonar-project.properties.old
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="*.Tests/test-result.xml"
         dotnet restore -v n
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="**.Tests/test-result.xml"
         dotnet build --configuration Debug --no-restore -v n
         dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml"
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-        mv sonar-project.properties.old sonar-project.properties
       if: ${{ always() }}
     - name: NUnit Reporter
       uses: MirrorNG/nunit-reporter@v1.0.9
