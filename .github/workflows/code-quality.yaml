@@ -71,7 +71,7 @@ jobs:
         dotnet restore -v n
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=**.Tests/TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=coverage/*.xml /d:sonar.cs.nunit.reportsPaths="**.Tests/test-result.xml"
         dotnet build --configuration Debug --no-restore -v n
-        dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml"
+        dotnet test --configuration Debug -r ./TestResults/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=test-result.xml" --collect:"Code Coverage"
         dotnet testx --project all
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
