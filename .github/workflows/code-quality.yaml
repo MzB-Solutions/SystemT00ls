@@ -1,9 +1,9 @@
 name: Code Quality/Coverage
 on:
   push:
-    branches: [ master ]
+    branches: [ master,dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ master,dev ]
     types: [opened, synchronize, reopened]
 jobs:
   code-quality-sonarcloud:
