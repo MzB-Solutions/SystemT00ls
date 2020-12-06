@@ -93,7 +93,7 @@ jobs:
         Get-ChildItem -Path ./coverage -Recurse -File *.*
         Write-Output "ALL XML FILES"
         Write-Output "========="
-        Get-ChildItem -Path ./ -Exclude ./.nuget/ -Recurse -File *.xml
+        Get-ChildItem -Path ./ -Exclude .nuget/* -Recurse -File *.xml
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
