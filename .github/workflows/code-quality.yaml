@@ -70,12 +70,26 @@ jobs:
       run: |
         dotnet tool install -g dotnet-testx
         choco install opencover
+        Write-Output "Start Sonar"
+        Write-Output "-----------"
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/*.xml"
+        Write-Output "Restore Project"
+        Write-Output "---------------"
         dotnet restore -v n
+        Write-Output "Debug Build"
+        Write-Output "--------------"
         dotnet build --configuration Debug --no-restore -v n
+        Write-Output "NUnit Tests"
+        Write-Output "-----------"
         dotnet test --configuration Debug -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --collect:"Code Coverage"
+        Write-Output "Copying NUnit File"
+        Write-Output "------------------"
         cp ./SManager.Core.Tests/nunit-result.xml ./coverage/nunit-result.xml
+        Write-Output "TESTX Suite"
+        Write-Output "-----------"
         dotnet testx --project all
+        Write-Output "Finish Sonar"
+        Write-Output "------------"
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
@@ -93,7 +107,7 @@ jobs:
         Get-ChildItem -Path ./coverage -Recurse -File *.*
         Write-Output "ALL XML FILES"
         Write-Output "========="
-        Get-ChildItem -Path ./ -Exclude .nuget/* -Recurse -File *.xml
+        Get-ChildItem -Path ./ -Exclude *nuget* -Recurse -File *.xml
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
