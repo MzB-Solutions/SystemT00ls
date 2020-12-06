@@ -68,8 +68,10 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
+        Push-Location ./SManager.Core.Tests/
+        dotnet add package opencover
+        Pop-Location
         dotnet tool install -g dotnet-testx
-        choco install opencover
         Write-Output "Start Sonar"
         Write-Output "-----------"
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/*.xml"
@@ -111,7 +113,8 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
-        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+#        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: './coverage/nunit-result.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'lcov'
         verbosity: 'Info'
