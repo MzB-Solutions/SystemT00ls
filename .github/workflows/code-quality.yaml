@@ -85,6 +85,15 @@ jobs:
 #        path: |
 #          ./coverage/nunit-result.xml
 #        access-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Output the Directories and Contents
+      shell: powershell
+      run: |
+        Write-Output "Coverage Files"
+        Write-Output "--------------"
+        Get-ChildItem -Path ./coverage -Recurse -File *.*
+        Write-Output "ALL XML FILES"
+        Write-Output "========="
+        Get-ChildItem -Path ./ -Recurse -File *.xml
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
