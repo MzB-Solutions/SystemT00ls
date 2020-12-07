@@ -69,7 +69,7 @@ jobs:
       shell: powershell
       run: |
         Push-Location ./SManager.Core.Tests/
-        dotnet add package opencover
+        dotnet add package opencover --package-directory ~/.nuget/packages/
         Pop-Location
         dotnet tool install -g dotnet-testx
         Write-Output "Start Sonar"
