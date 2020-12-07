@@ -15,7 +15,7 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       #NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-      NUGET_PACKAGES: ${{ USERPROFILE }}/.nuget/packages
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
       SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
       BUILD_CONFIG: Debug # 'Debug' or 'Release' for testing we should really use Debug to make sure we are instrumenting right from the start...
       BUILD_VERBOSITY: 'n' ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
@@ -30,6 +30,9 @@ jobs:
         java-version: '11' # The JDK version to make available on the path.
         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
         architecture: x64 # (x64 or x86) - defaults to x64
+    - name: Fix NuGet Path
+      id: fixnuget
+      run: Write-Output "$NUGET_PACKAGES=$USERPROFILE/.nuget/packages" >> $GITHUB_ENV
     - name: Cache NuGet Packages
       id: cache-nuget
       uses: actions/cache@v2
@@ -71,7 +74,7 @@ jobs:
         dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
         dotnet clean --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
-        dotnet restore --packages ${{ env.NUGET_PACKAGES }} --no-cache --force -v ${{ env.BUILD_VERBOSITY }}
+        dotnet restore --no-cache --force -v ${{ env.BUILD_VERBOSITY }}
     - name: Build and analyze
       id: build
       env:
