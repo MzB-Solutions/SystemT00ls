@@ -98,6 +98,10 @@ jobs:
         Write-Output "::endgroup::"
         Write-Output "::group::Running 'dotnet testx' ..."
         dotnet testx --project all --verbose
+        Write-Output "::group::Coverage Files"
+        Get-ChildItem -Path ./coverage/ -Recurse *.*
+        Get-ChildItem -Path ./SManager.Core.Tests/coverage/ -Recurse *.*
+        Write-Output "::endgroup::"
         Write-Output "::endgroup"
         cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml
         Write-Output "::group::Finalising Sonar Scanner ..."
@@ -132,9 +136,6 @@ jobs:
         Write-Output "::group::Environment Variables"
         Write-Output "(After Build&Reporting)"
         Write-Output "$GITHUB_ENV"
-        Write-Output "::endgroup::"
-        Write-Output "::group::Coverage Files"
-        Get-ChildItem -Path ./coverage/ -Recurse *.*
         Write-Output "::endgroup::"
         Write-Output "::group::NuGet Tools"
         Get-ChildItem -Path ${{ env.NUGET_PACKAGES }} -Recurse *.exe
