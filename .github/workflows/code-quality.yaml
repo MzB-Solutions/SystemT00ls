@@ -32,7 +32,7 @@ jobs:
         architecture: x64 # (x64 or x86) - defaults to x64
     - name: Fix NuGet Path
       id: fixnuget
-      run: Write-Output "$NUGET_PACKAGES=$USERPROFILE/.nuget/packages" >> $GITHUB_ENV
+      run: Write-Output '$NUGET_PACKAGES=$USERPROFILE/.nuget/packages' >> $GITHUB_ENV
     - name: Cache NuGet Packages
       id: cache-nuget
       uses: actions/cache@v2
@@ -41,6 +41,13 @@ jobs:
         key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-nuget-
+    - name: Debug Output before we do anything
+      id: dumpenv1
+      if: ${{ env.BUILD_VERBOSITY }} != 'q'
+      run: |
+        Write-Output "::group::DUMPING ENVIRONMENT VARS"
+        'Get-ChildItem env:'
+        Write-Output "::endgroup::"
     - name: Cache SonarCloud packages
       id: cache-sonar-packages
       uses: actions/cache@v2
@@ -60,23 +67,25 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
-    - name: Debug Output before we do anything
-      id: dumpenv
-      if: ${{ env.BUILD_VERBOSITY }} != 'q'
-      run: |
-        Write-Output "::group::DUMPING ENVIRONMENT VARS"
-        'Get-ChildItem env:'
-        Write-Output "::endgroup::"
     - name: Prepare environment
       id: envprep
+      continue-on-error: ${{ true }}
       run: |
         dotnet tool update dotnet-testx --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
         dotnet clean --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
         dotnet restore --no-cache --force -v ${{ env.BUILD_VERBOSITY }}
+    - name: Debug Output after environment prep
+      id: dumpenv2
+      if: ${{ env.BUILD_VERBOSITY }} != 'q'
+      run: |
+        Write-Output "::group::DUMPING ENVIRONMENT VARS"
+        'Get-ChildItem env:'
+        Write-Output "::endgroup::"
     - name: Build and analyze
       id: build
+      continue-on-error: ${{ true }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -90,6 +99,7 @@ jobs:
     - name: NUnit Reporter
       id: nunit-report
       uses: MirrorNG/nunit-reporter@v1.0.9
+      continue-on-error: ${{ true }}
       if: always()
       with:
         path: |
@@ -97,6 +107,7 @@ jobs:
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: ReportGenerator
       id: reportgenerator
+      continue-on-error: ${{ true }}
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
 #        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
@@ -107,9 +118,11 @@ jobs:
     - name: Coveralls
       id: coveralls
       uses: coverallsapp/github-action@master
+      continue-on-error: ${{ true }}
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
+      id: dumpenv3
       #if: (steps.envprep.outcome == 'failure' || steps.build.outcome == 'failure' || steps.reportgenerator.outcome == 'failure')
       if: (steps.*.outcome == 'failure' && env.BUILD_VERBOSITY != 'q')
       run: |
