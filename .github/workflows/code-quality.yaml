@@ -15,10 +15,11 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       #NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-      NUGET_PACKAGES: ~/.nuget/packages
+      NUGET_PACKAGES: ${{ env.USERPROFILE}}/.nuget/packages
       SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
-      BUILD_CONFIG: Debug
+      BUILD_CONFIG: Debug # 'Debug' or 'Release' for testing we should really use Debug to make sure we are instrumenting right from the start...
       BUILD_VERBOSITY: 'n' ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
+      ##                        NOTE: setting 'q' will disable most output to the console, this should only be considered if we are sure the build process works!!!
     steps:
     - uses: actions/checkout@v2
       with:
@@ -57,15 +58,15 @@ jobs:
       with:
         dotnet-version: '5.0.x'
     - name: Debug Output before we do anything
+      id: dumpenv
       if: ${{ env.BUILD_VERBOSITY }} != 'q'
+      run: |
+        Write-Output "::group::DUMPING ENVIRONMENT VARS"
+        'Get-ChildItem env:'
+        Write-Output "::endgroup::"
     - name: Prepare environment
       id: envprep
       run: |
-        Write-Output "---------------------"
-        Write-Output "Environment Variables"
-        Write-Output "(Before Preparation)"
-        Write-Output "---------------------"
-        'Get-ChildItem env:'
         dotnet tool update dotnet-testx --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
@@ -93,7 +94,6 @@ jobs:
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: ReportGenerator
       id: reportgenerator
-      if: always() # ignore this failure (for now), so we can at least have a hope of finishing a run
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
 #        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
@@ -108,27 +108,23 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
       #if: (steps.envprep.outcome == 'failure' || steps.build.outcome == 'failure' || steps.reportgenerator.outcome == 'failure')
-      if: steps.*.outcome == 'failure'
+      if: (steps.*.outcome == 'failure' && env.BUILD_VERBOSITY != 'q')
       run: |
-        Write-Output "---------------------"
-        Write-Output "Environment Variables"
+        Write-Output "::group::Environment Variables"
         Write-Output "(After Build&Reporting)"
-        Write-Output "---------------------"
         'Get-ChildItem env:'
-        Write-Output "--------------"
-        Write-Output "Coverage Files"
-        Write-Output "--------------"
+        Write-Output "::endgroup::"
+        Write-Output "::group::Coverage Files"
         Get-ChildItem -Path ./coverage/ -Recurse *.*
-        Write-Output "-----------"
-        Write-Output "NuGet Tools"
-        Write-Output "-----------"
+        Write-Output "::endgroup::"
+        Write-Output "::group::NuGet Tools"
         Get-ChildItem -Path ${{ env.NUGET_PACKAGES }} -Recurse *.exe
-        Write-Output "-----------------"
-        Write-Output "Test Output Files"
+        Write-Output "::endgroup::"
+        Write-Output "::group::Test Output Files"
         Write-Output "  (*.xml|*.trx)"
-        Write-Output "-----------------"
         Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.xml
         Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.trx
+        Write-Output "::endgroup::"
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
       if: always()
