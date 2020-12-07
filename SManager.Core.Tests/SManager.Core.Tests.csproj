@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20201123-03" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.0-preview-20201126-03" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.0-preview-20201126-03" />
@@ -20,7 +24,6 @@
     <PackageReference Include="NUnit.Console" Version="3.12.0-beta1" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0-beta.1" />
     <PackageReference Include="NunitXml.TestLogger" Version="2.1.80" />
-    <PackageReference Include="opencover" Version="4.7.922" />
   </ItemGroup>
 
   <ItemGroup>

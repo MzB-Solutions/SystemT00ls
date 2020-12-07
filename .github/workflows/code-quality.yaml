@@ -87,22 +87,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        Write-Output "::debug::Preparing Sonar Scanner with './.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/results.xml" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/MSTest-result.trx"'"
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/results.xml" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/MSTest-result.trx"
-        Write-Output "::debug::Running 'dotnet build --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}' ..."
         dotnet build --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
-        Write-Output "::debug::Running 'dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"[nunit,trx];[nunit,MSTest]-result.xml" --collect:"Code Coverage" -v ${{ env.BUILD_VERBOSITY }}' with nunit and mstest..."
-        dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"trx;LogFilePath=MSTest-result.trx" --collect:"Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
-        dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --collect:"Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
-        Write-Output "::debug::Running 'dotnet testx --project all' ..."
+        dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --collect:"XPlat Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
         dotnet testx --project all
         Write-Output "::group::Coverage Files"
         Get-ChildItem -Path ./coverage/ -Recurse *.*
         Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.*
         Write-Output "::endgroup::"
-        Write-Output "::debug::Running 'cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml'"
         cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml
-        Write-Output "::debug::Finalising Sonar Scanner './.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"'"
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     - name: NUnit Reporter
       id: nunit-report
@@ -117,7 +110,7 @@ jobs:
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
         #reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-        reports: 'coverage/*.trx' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: '**/coverage.cobertura.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'lcov'
         verbosity: 'Info'
