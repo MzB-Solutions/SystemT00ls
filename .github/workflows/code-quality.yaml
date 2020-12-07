@@ -14,7 +14,7 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
-      SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
+      SMANAGER_VERSION: v20.12.125 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
       BUILD_CONFIG: Debug # 'Debug' or 'Release' for testing we should really use Debug to make sure we are instrumenting right from the start...
       BUILD_VERBOSITY: 'm' ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
       ##                        NOTE: setting 'q' will disable most output to the console, this should only be considered if we are sure the build process works!!!
