@@ -4,9 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <AnalysisLevel>5.0</AnalysisLevel>
-    <Version>20.12.125</Version>
-    <FileVersion>20.12.125</FileVersion>
-    <AssemblyVersion>20.12.125</AssemblyVersion>
+    <Version>20.12.126</Version>
+    <FileVersion>20.12.126</FileVersion>
+    <AssemblyVersion>20.12.126</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

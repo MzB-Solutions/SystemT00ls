@@ -25,7 +25,7 @@ namespace SManager.Core
         {
             if (min.CompareTo(max) > 0)
             {
-                throw new ArithmeticException("min Value cannot be greater than max Value");
+                throw new ArithmeticException("[min] Value cannot be greater than [max] Value");
             }
             if (value.CompareTo(min) < 0)
             {

@@ -20,7 +20,7 @@ namespace Test.SManager.Core
         public void Clamp_ReturnClampedValue(int value, int min, int max)
         {
             _resultOfClamp = IntTools.Clamp(value, min, max);
-            if ((_resultOfClamp >= min && _resultOfClamp <= max) || int.Equals(value, _resultOfClamp))
+            if ((_resultOfClamp >= min && _resultOfClamp <= max) || Equals(value, _resultOfClamp))
             {
                 Assert.Pass();
             }

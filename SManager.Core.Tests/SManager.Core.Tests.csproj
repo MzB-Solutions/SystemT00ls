@@ -5,11 +5,11 @@
 
     <IsPackable>false</IsPackable>
 
-    <Version>20.12.125</Version>
+    <Version>20.12.126</Version>
 
-    <FileVersion>20.12.125</FileVersion>
+    <FileVersion>20.12.126</FileVersion>
 
-    <AssemblyVersion>20.12.125</AssemblyVersion>
+    <AssemblyVersion>20.12.126</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
