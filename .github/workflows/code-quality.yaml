@@ -95,6 +95,10 @@ jobs:
     - name: Output the Directories and Contents
       shell: powershell
       run: |
+        Write-Output "---------------------"
+        Write-Output "Environment Variables"
+        Write-Output "---------------------"
+        'Get-ChildItem env:'
         Write-Output "--------------"
         Write-Output "Coverage Files"
         Write-Output "--------------"
