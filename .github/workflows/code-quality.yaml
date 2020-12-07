@@ -11,10 +11,11 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
-      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+      #NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+      NUGET_PACKAGES: ~/.nuget/packages
       SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
       BUILD_CONFIG: Debug
-      BUILD_VERBOSITY: 3 #https://docs.microsoft.com/en-us/dotnet/api/microsoft.build.framework.loggerverbosity?view=msbuild-16-netcore
+      BUILD_VERBOSITY: d ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -29,7 +30,7 @@ jobs:
       id: cache-nuget
       uses: actions/cache@v2
       with:
-        path: ${{ github.workspace }}/.nuget/packages
+        path: ${{ env.NUGET_PACKAGES }}
         key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-nuget-
@@ -51,17 +52,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
-    - name: Install SonarCloud scanner
-      shell: powershell
-      run: |
-        New-Item -Path ./.sonar/scanner -ItemType Directory
-        dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
     - name: Prepare environment
       shell: powershell
       run: |
-        dotnet tool install -g dotnet-testx -v ${{ env.BUILD_VERBOSITY }}
+        dotnet tool update dotnet-testx --no-cache --global --tool-path ${{ env.NUGET_PACKAGES }} -v ${{ env.BUILD_VERBOSITY }}
+        dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global --tool-path ${{ env.NUGET_PACKAGES }} -v ${{ env.BUILD_VERBOSITY }}
+        dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
         dotnet clean --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
-        dotnet restore --packages ${{ env.NUGET_PACKAGES }} --force -v ${{ env.BUILD_VERBOSITY }}
+        dotnet restore --packages ${{ env.NUGET_PACKAGES }} --no-cache --force -v ${{ env.BUILD_VERBOSITY }}
     - name: Build and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -101,6 +99,10 @@ jobs:
         Write-Output "Coverage Files"
         Write-Output "--------------"
         Get-ChildItem -Path ./coverage/ -Recurse *.*
+        Write-Output "-----------"
+        Write-Output "NuGet Tools"
+        Write-Output "-----------"
+        Get-ChildItem -Path ./.nuget/packages/ -Recurse *.exe
         Write-Output "-----------------"
         Write-Output "Test Output Files"
         Write-Output "  (*.xml|*.trx)"
