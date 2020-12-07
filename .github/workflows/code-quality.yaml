@@ -15,7 +15,7 @@ jobs:
       NUGET_PACKAGES: ~/.nuget/packages
       SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
       BUILD_CONFIG: Debug
-      BUILD_VERBOSITY: d ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
+      BUILD_VERBOSITY: 'n' ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
     steps:
     - uses: actions/checkout@v2
       with:
