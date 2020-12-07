@@ -127,11 +127,11 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
       id: dumpenv3
-      if: (steps.*.outcome == 'failure' || env.BUILD_VERBOSITY != 'q')
+      if: steps.*.outcome == 'failure' || env.BUILD_VERBOSITY != 'q'
       run: |
         Write-Output "::group::Environment Variables"
         Write-Output "(After Build&Reporting)"
-        'Get-ChildItem env:'
+        Write-Output "$GITHUB_ENV"
         Write-Output "::endgroup::"
         Write-Output "::group::Coverage Files"
         Get-ChildItem -Path ./coverage/ -Recurse *.*
