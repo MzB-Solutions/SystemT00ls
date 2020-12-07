@@ -112,6 +112,7 @@ jobs:
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: ReportGenerator
       id: reportgenerator
+      continue-on-error: ${{ true }}
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
         reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
@@ -126,7 +127,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
       id: dumpenv3
-      if: (steps.*.outcome == 'failure' && env.BUILD_VERBOSITY != 'q')
+      if: (steps.*.outcome == 'failure' || env.BUILD_VERBOSITY != 'q')
       run: |
         Write-Output "::group::Environment Variables"
         Write-Output "(After Build&Reporting)"
