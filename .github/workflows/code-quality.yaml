@@ -35,16 +35,9 @@ jobs:
       id: cache-sonar-packages
       uses: actions/cache@v2
       with:
-        path: ~/.sonar/cache
+        path: ~/.sonar
         key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-cache
         restore-keys: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-cache
-    - name: Cache SonarCloud scanner
-      id: cache-sonar-scanner
-      uses: actions/cache@v2
-      with:
-        path: ./.sonar/scanner
-        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-scanner
-        restore-keys: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-scanner
     - name: Cache Dotnet 5.0
       id: cache-dotnet-5
       uses: actions/cache@v2
@@ -57,7 +50,6 @@ jobs:
       with:
         dotnet-version: '5.0.x'
     - name: Install SonarCloud scanner
-      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
       shell: powershell
       run: |
         New-Item -Path ./.sonar/scanner -ItemType Directory
@@ -68,30 +60,15 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        Push-Location ./SManager.Core.Tests/
-        dotnet add package opencover --package-directory ~/.nuget/packages/
-        Pop-Location
         dotnet tool install -g dotnet-testx
-        Write-Output "Start Sonar"
-        Write-Output "-----------"
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/*.xml"
-        Write-Output "Restore Project"
-        Write-Output "---------------"
-        dotnet restore -v n
-        Write-Output "Debug Build"
-        Write-Output "--------------"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/results.xml" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/MSTest-result.trx"
+        dotnet clean --configuration Debug
+        dotnet restore --packages ${{ $env.NUGET_PACKAGES }} --force -v n
         dotnet build --configuration Debug --no-restore -v n
-        Write-Output "NUnit Tests"
-        Write-Output "-----------"
-        dotnet test --configuration Debug -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --collect:"Code Coverage"
-        Write-Output "Copying NUnit File"
-        Write-Output "------------------"
-        cp ./SManager.Core.Tests/nunit-result.xml ./coverage/nunit-result.xml
-        Write-Output "TESTX Suite"
-        Write-Output "-----------"
+        dotnet test --configuration Debug -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"trx;LogFilePath=MSTest-result.trx" --logger:"nunit;LogFilePath=nunit-result.xml" --collect:"Code Coverage"
+        cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml
+        cp ./SManager.Core.Tests/MSTest-result.trx -Destination ./coverage/MSTest-result.trx
         dotnet testx --project all
-        Write-Output "Finish Sonar"
-        Write-Output "------------"
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       if: ${{ always() }}
     - name: NUnit Reporter
@@ -101,20 +78,11 @@ jobs:
         path: |
           ./coverage/nunit-result.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Output the Directories and Contents
-      shell: powershell
-      run: |
-        Write-Output "Coverage Files"
-        Write-Output "--------------"
-        Get-ChildItem -Path ./coverage -Recurse -File *.*
-        Write-Output "ALL XML FILES"
-        Write-Output "========="
-        Get-ChildItem -Path ./ -Exclude *nuget* -Recurse -File *.xml
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
 #        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-        reports: './coverage/nunit-result.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: './coverage/MSTest-result.trx' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'lcov'
         verbosity: 'Info'
@@ -122,6 +90,13 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Output the Directories and Contents
+      shell: powershell
+      run: |
+        Write-Output "--------------"
+        Write-Output "Coverage Files"
+        Write-Output "--------------"
+        Get-ChildItem -Path ./coverage -Recurse *.*
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
       if: always()
