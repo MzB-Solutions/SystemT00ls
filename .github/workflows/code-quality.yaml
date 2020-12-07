@@ -1,49 +1,27 @@
 name: Code Quality/Coverage
 on:
   push:
-    branches: [ master ]
+    branches: [ master,dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ master,dev ]
     types: [opened, synchronize, reopened]
 jobs:
-#  code-quality-sonarcloud:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Notify of Build start
-#      uses: sarisia/actions-status-discord@v1
-#      if: always()
-#      with:
-#        webhook: ${{ secrets.DISCORDBUILDSBOT }}
-#        status: ${{ job.status }}
-#        username: MzB Build Notifications
-#    - uses: actions/setup-java@v1
-#      with:
-#        java-version: '12' # The JDK version to make available on the path.
-#        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-#        architecture: x64 # (x64 or x86) - defaults to x64
-#    - uses: actions/checkout@v2
-#      with:
-#        submodules: recursive
-#    - name: SonarCloud Scan
-#      uses: sonarsource/sonarcloud-github-action@master
-#      with:
-#        args: >
-#          -Dsonar.verbose=false
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  code-quality-local:
+  sonarcloud-local:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      SMANAGER_VERSION: v20.12.125 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
+      BUILD_CONFIG: Debug # 'Debug' or 'Release' for testing we should really use Debug to make sure we are instrumenting right from the start...
+      BUILD_VERBOSITY: 'q' ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
+      ##                        NOTE: setting 'q' will disable most output to the console, this should only be considered if we are sure the build process works!!!
     steps:
-    - name: Notify of Build start
-      uses: sarisia/actions-status-discord@v1
-      if: always()
-      with:
-        webhook: ${{ secrets.DISCORDBUILDSBOT }}
-        status: ${{ job.status }}
-        username: MzB Build Notifications
     - uses: actions/checkout@v2
       with:
+        fetch-depth: 0
         submodules: recursive
     - uses: actions/setup-java@v1
       with:
@@ -51,34 +29,67 @@ jobs:
         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
         architecture: x64 # (x64 or x86) - defaults to x64
     - name: Cache SonarCloud packages
-      uses: actions/cache@v1
+      id: cache-sonar-packages
+      uses: actions/cache@v2
       with:
-        path: ~\sonar\cache
-        key: ${{ runner.os }}-sonar
-        restore-keys: ${{ runner.os }}-sonar
-    - name: Cache SonarCloud scanner
-      id: cache-sonar-scanner
-      uses: actions/cache@v1
+        path: ~/.sonar
+        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-cache
+        restore-keys: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-sonar-cache
+    - name: Cache Dotnet 5.0
+      id: cache-dotnet-5
+      uses: actions/cache@v2
       with:
-        path: .\.sonar\scanner
-        key: ${{ runner.os }}-sonar-scanner
-        restore-keys: ${{ runner.os }}-sonar-scanner
-    - name: Install SonarCloud scanner
-      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-      shell: powershell
+        key: ${{ env.SMANAGER_VERSION }}-${{ runner.os }}-dotnet
+        path: ${{ env.LOCALAPPDATA }}\Microsoft\dotnet
+    - name: Install dotnet 5.0
+      id: install-dotnet-5
+      if: steps.cache-dotnet-5.outputs.cache-hit != 'true'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    - name: Prepare environment
+      id: envprep
       run: |
-        New-Item -Path .\.sonar\scanner -ItemType Directory
-        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-    - name: Install dependencies
-      run: dotnet restore -v n
+        dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
+        dotnet clean --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
+        dotnet restore --no-cache --force -v ${{ env.BUILD_VERBOSITY }}
     - name: Build and analyze
+      id: build
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      shell: powershell
       run: |
-        mv sonar-project.properties sonar-project.old
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"MzB-Solutions_SystemT00ls" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        dotnet build --configuration Debug --no-restore -v n
-        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-        mv sonar-project.old sonar-project.properties
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/*.trx"
+        dotnet build --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
+        dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --logger:"trx" --collect:"XPlat Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
+        cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml
+        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    - name: NUnit Reporter
+      id: nunit-report
+      uses: MirrorNG/nunit-reporter@v1.0.9
+      with:
+        path: |
+          ./coverage/nunit-result.xml
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: ReportGenerator
+      id: reportgenerator
+      continue-on-error: ${{ true }}
+      uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
+      with:
+        #reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: './coverage/**/coverage.cobertura.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
+        reporttypes: 'lcov'
+        verbosity: 'Info'
+    - name: Coveralls
+      id: coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Notify of Build result status
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORDBUILDSBOT }}
+        status: ${{ job.status }}
+        username: MzB Build Notifications
