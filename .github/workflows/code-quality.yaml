@@ -114,8 +114,8 @@ jobs:
       id: reportgenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
-#        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-        reports: 'coverage/*.trx' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        #reports: 'coverage/*.trx' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'coverage' # REQUIRED # The directory where the generated report should be saved.
         reporttypes: 'lcov'
         verbosity: 'Info'
@@ -126,7 +126,6 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
       id: dumpenv3
-      #if: (steps.envprep.outcome == 'failure' || steps.build.outcome == 'failure' || steps.reportgenerator.outcome == 'failure')
       if: (steps.*.outcome == 'failure' && env.BUILD_VERBOSITY != 'q')
       run: |
         Write-Output "::group::Environment Variables"
