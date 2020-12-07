@@ -99,7 +99,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
-      if: ${{ steps.env-prep.outcome=="failure" || steps.build.outcome=="failure" }}
+      if: (steps.env-prep.outcome == "failure" || steps.build.outcome == "failure")
       shell: powershell
       run: |
         Write-Output "---------------------"
