@@ -54,7 +54,7 @@ jobs:
       with:
         dotnet-version: '5.0.x'
     - name: Prepare environment
-      id: env-prep
+      id: envprep
       shell: powershell
       run: |
         dotnet tool update dotnet-testx --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
@@ -84,7 +84,7 @@ jobs:
           ./coverage/nunit-result.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: ReportGenerator
-      id: report-generator
+      id: reportgenerator
       if: always() # ignore this failure (for now), so we can at least have a hope of finishing a run
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
@@ -99,7 +99,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
-      if: (steps.env-prep.outcome == 'failure' || steps.build.outcome == 'failure')
+      if: (steps.envprep.outcome == 'failure' || steps.build.outcome == 'failure' || steps.reportgenerator.outcome == 'failure')
       shell: powershell
       run: |
         Write-Output "---------------------"
