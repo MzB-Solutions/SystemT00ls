@@ -15,7 +15,7 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       #NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
-      NUGET_PACKAGES: ${{ env.USERPROFILE}}/.nuget/packages
+      NUGET_PACKAGES: ${{ USERPROFILE }}/.nuget/packages
       SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
       BUILD_CONFIG: Debug # 'Debug' or 'Release' for testing we should really use Debug to make sure we are instrumenting right from the start...
       BUILD_VERBOSITY: 'n' ## q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
