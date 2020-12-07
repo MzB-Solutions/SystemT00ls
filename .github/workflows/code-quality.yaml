@@ -106,7 +106,7 @@ jobs:
         Write-Output "-----------"
         Write-Output "NuGet Tools"
         Write-Output "-----------"
-        Get-ChildItem -Path ./.nuget/packages/ -Recurse *.exe
+        Get-ChildItem -Path ${{ env.NUGET_PACKAGES }} -Recurse *.exe
         Write-Output "-----------------"
         Write-Output "Test Output Files"
         Write-Output "  (*.xml|*.trx)"
