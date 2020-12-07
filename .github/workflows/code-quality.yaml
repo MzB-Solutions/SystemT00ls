@@ -8,6 +8,9 @@ on:
 jobs:
   sonarcloud-local:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -53,10 +56,16 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
+    - name: Debug Output before we do anything
+      if: ${{ env.BUILD_VERBOSITY }} != 'q'
     - name: Prepare environment
       id: envprep
-      shell: powershell
       run: |
+        Write-Output "---------------------"
+        Write-Output "Environment Variables"
+        Write-Output "(Before Preparation)"
+        Write-Output "---------------------"
+        'Get-ChildItem env:'
         dotnet tool update dotnet-testx --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
@@ -67,7 +76,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      shell: powershell
       run: |
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/results.xml" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/MSTest-result.trx"
         dotnet build --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
@@ -101,10 +109,10 @@ jobs:
     - name: Output the Directories and Contents
       #if: (steps.envprep.outcome == 'failure' || steps.build.outcome == 'failure' || steps.reportgenerator.outcome == 'failure')
       if: steps.*.outcome == 'failure'
-      shell: powershell
       run: |
         Write-Output "---------------------"
         Write-Output "Environment Variables"
+        Write-Output "(After Build&Reporting)"
         Write-Output "---------------------"
         'Get-ChildItem env:'
         Write-Output "--------------"
