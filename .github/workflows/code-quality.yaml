@@ -59,14 +59,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="./coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="./coverage/MSTest-result.trx"
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/*.trx"
         dotnet build --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
-        dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --logger:"trx;LogFilePath=MSTest-result.trx" --collect:"XPlat Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
-        Write-Output "::group::Coverage Files"
-        Get-ChildItem -Path ./coverage/ -Recurse *.*
-        Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.xml
-        Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.trx
-        Write-Output "::endgroup::"
+        dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"nunit;LogFilePath=nunit-result.xml" --logger:"trx" --collect:"XPlat Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
         cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     - name: NUnit Reporter
@@ -91,20 +86,6 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Output the Directories and Contents
-      id: dumpenv3
-      if: env.BUILD_VERBOSITY != 'q'
-      run: |
-        Write-Output "::group::Environment Variables"
-        Write-Output "(After Build&Reporting)"
-        Write-Output "$GITHUB_ENV"
-        Write-Output "::endgroup::"
-        'Get-ChildItem env:'
-        Write-Output "::group::Coverage Files"
-        Get-ChildItem -Path ./coverage/ -Recurse *.*
-        Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.xml
-        Get-ChildItem -Path ./SManager.Core.Tests/ -Recurse *.trx
-        Write-Output "::endgroup::"
     - name: Notify of Build result status
       uses: sarisia/actions-status-discord@v1
       if: always()
