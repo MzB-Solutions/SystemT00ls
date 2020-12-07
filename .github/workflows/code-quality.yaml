@@ -55,8 +55,8 @@ jobs:
     - name: Prepare environment
       shell: powershell
       run: |
-        dotnet tool update dotnet-testx --no-cache --global --tool-path ${{ env.NUGET_PACKAGES }} -v ${{ env.BUILD_VERBOSITY }}
-        dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global --tool-path ${{ env.NUGET_PACKAGES }} -v ${{ env.BUILD_VERBOSITY }}
+        dotnet tool update dotnet-testx --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
+        dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-sonarscanner --no-cache --tool-path ./.sonar/scanner  -v ${{ env.BUILD_VERBOSITY }}
         dotnet clean --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
         dotnet restore --packages ${{ env.NUGET_PACKAGES }} --no-cache --force -v ${{ env.BUILD_VERBOSITY }}
