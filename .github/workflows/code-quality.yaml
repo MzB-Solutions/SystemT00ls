@@ -14,7 +14,6 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
-      #NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
       SMANAGER_VERSION: v20.12.124 # We use this to force "unique"-enough cache keys, that we can "flush" when we update the version internally
       BUILD_CONFIG: Debug # 'Debug' or 'Release' for testing we should really use Debug to make sure we are instrumenting right from the start...
@@ -32,7 +31,7 @@ jobs:
         architecture: x64 # (x64 or x86) - defaults to x64
     - name: Fix NuGet Path
       id: fixnuget
-      run: Write-Output '$NUGET_PACKAGES=$USERPROFILE/.nuget/packages' >> $GITHUB_ENV
+      run: Write-Output '$NUGET_PACKAGES=$USERPROFILE\.nuget\packages' >> $GITHUB_ENV
     - name: Cache NuGet Packages
       id: cache-nuget
       uses: actions/cache@v2
@@ -69,7 +68,6 @@ jobs:
         dotnet-version: '5.0.x'
     - name: Prepare environment
       id: envprep
-      continue-on-error: ${{ true }}
       run: |
         dotnet tool update dotnet-testx --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
         dotnet tool update dotnet-reportgenerator-globaltool --no-cache --global -v ${{ env.BUILD_VERBOSITY }}
@@ -85,29 +83,35 @@ jobs:
         Write-Output "::endgroup::"
     - name: Build and analyze
       id: build
-      continue-on-error: ${{ true }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
+        Write-Output "::group::Preparing Sonar Scanner"
         ./.sonar/scanner/dotnet-sonarscanner begin /k:"MzB-Solutions_SManager" /o:"mzb-solutions" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage/results.xml" /d:sonar.cs.nunit.reportsPaths="coverage/nunit-result.xml" /d:sonar.cs.vstest.reportsPaths="coverage/MSTest-result.trx"
+        Write-Output "::endgroup::"
+        Write-Output "::group::Running 'dotnet build' ..."
         dotnet build --configuration ${{ env.BUILD_CONFIG }} -v ${{ env.BUILD_VERBOSITY }}
+        Write-Output "::endgroup"
+        Write-Output "::group::Running 'dotnet test' with nunit and mstest..."
         dotnet test --configuration ${{ env.BUILD_CONFIG }} -r ./coverage/ -s ./SManager.Core.Tests/CoreTests.runsettings --test-adapter-path:. --logger:"trx;LogFilePath=MSTest-result.trx" --logger:"nunit;LogFilePath=nunit-result.xml" --collect:"Code Coverage" -v ${{ env.BUILD_VERBOSITY }}
+        Write-Output "::endgroup::"
+        Write-Output "::group::Running 'dotnet testx' ..."
         dotnet testx --project all --verbose
+        Write-Output "::endgroup"
         cp ./SManager.Core.Tests/nunit-result.xml -Destination ./coverage/nunit-result.xml
+        Write-Output "::group::Finalising Sonar Scanner ..."
         ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        Write-Output "::endgroup::"
     - name: NUnit Reporter
       id: nunit-report
       uses: MirrorNG/nunit-reporter@v1.0.9
-      continue-on-error: ${{ true }}
-      if: always()
       with:
         path: |
           ./coverage/nunit-result.xml
         access-token: ${{ secrets.GITHUB_TOKEN }}
     - name: ReportGenerator
       id: reportgenerator
-      continue-on-error: ${{ true }}
       uses: danielpalme/ReportGenerator-GitHub-Action@4.8.1
       with:
 #        reports: './coverage/results.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
@@ -118,7 +122,6 @@ jobs:
     - name: Coveralls
       id: coveralls
       uses: coverallsapp/github-action@master
-      continue-on-error: ${{ true }}
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Output the Directories and Contents
