@@ -10,7 +10,7 @@ Please check out our workflow files under ```./.github/workflows/*.yaml``` to se
 ### Github Actions
 
 | Workflow              |                                                   Build Status                                                  |
-|-----------------------|:---------------------------------------------------------------------------------------------------------------:|
+|-----------------------|-----------------------------------------------------------------------------------------------------------------|
 | .Net Core Build       | ![.NET Core build](https://github.com/MzB-Solutions/SystemT00ls/workflows/&period;NET%20Core%20build/badge.svg) |
 | Code Coverage/Quality |  ![Code Quality](https://github.com/MzB-Solutions/SystemT00ls/workflows/Code%20Quality&sol;Coverage/badge.svg)  |
 
