@@ -1,7 +1,8 @@
 # SManager
-A **S**ystem**Manager** for CLI and GUI build on .NET 5 (previously known as .Net Core)
-The CLI uses a customized version of [EasyConsole](https://github.com/MzB-Solutions/EasyConsole) to display menus  
-This software aims to be as much an actual system tool as much as showcasing some common programming techniques and patterns
+A **S**ystem**Manager** for CLI and GUI build on .NET 5 (previously known as .Net Core)  
+The CLI app uses a customized version of [EasyConsole](https://github.com/MzB-Solutions/EasyConsole) to display menus etc.  
+The GUI app uses AvaloniaUI as a presentation framework, capable of crossplatform compilation.  
+This software aims to be as much an actual system tool as much as showcasing some common programming techniques and patterns.
 
 ## Build Status
 We are using [Github Actions](https://github.com/features/actions) to build the software, as well as running code quality and coverage checks.  
