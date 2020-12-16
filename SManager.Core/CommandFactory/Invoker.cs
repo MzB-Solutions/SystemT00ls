@@ -2,33 +2,26 @@
 {
     internal class Invoker
     {
-        #region Private Fields
+        #region Private Properties
 
-        private readonly Command _cmd;
+        private Command Command { get; set; }
 
-        #endregion Private Fields
+        #endregion Private Properties
 
         #region Public Constructors
 
-        /// <summary>
-        /// Invoker Constructor
-        /// </summary>
-        /// <param name="command">Passes in the command to run</param>
-        public Invoker(Command command)
+        public Invoker(Command _command)
         {
-            _cmd = command;
+            Command = _command;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        /// <summary>
-        /// The inherited Execute command
-        /// </summary>
         public void ExecuteCommand()
         {
-            _cmd.Execute();
+            Command.Execute();
         }
 
         #endregion Public Methods

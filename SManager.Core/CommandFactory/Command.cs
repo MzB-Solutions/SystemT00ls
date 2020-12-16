@@ -1,38 +1,27 @@
 ﻿namespace SManager.Core.CommandFactory
 {
-    /// <summary>
-    /// All commands should be based of this class
-    /// </summary>
-    /// <remarks>Here's an <see cref="Commands">example</see>.</remarks>
-    internal abstract class Command
+    internal class Command : CommandBase
     {
-        #region Protected Fields
+        #region Private Fields
 
-        /// <summary>
-        /// A Reciver object to contain an Action() command
-        /// </summary>
-        protected Invoker Receiver;
+        private string _name;
+        private string _sender;
 
-        #endregion Protected Fields
+        #endregion Private Fields
 
-        #region Protected Constructors
+        #region Public Properties
 
-        /// <summary>
-        /// The Command Constructor
-        /// </summary>
-        /// <param name="receiver">
-        /// Takes a Receiver object and upon construction uses it to fill the protected var
-        /// </param>
-        protected Command(Invoker receiver)
-        {
-            Receiver = receiver;
-        }
+        public override string Name { get => _name; set => _name = value; }
+        public override string Sender { get => _sender; set => _sender = value; }
 
-        #endregion Protected Constructors
+        #endregion Public Properties
 
         #region Public Methods
 
-        public abstract void Execute();
+        public override void Execute()
+        {
+            throw new System.NotImplementedException();
+        }
 
         #endregion Public Methods
     }
