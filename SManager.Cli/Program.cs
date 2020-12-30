@@ -9,7 +9,7 @@ namespace SManager.Cli
         private static void Main(string[] _args)
         {
             Console.WriteLine("Hello World!");
-            if (_args.Length != 1) { }
+            if (_args.Length <= 1) { }
             else
             {
                 _ = Console.ReadKey();
