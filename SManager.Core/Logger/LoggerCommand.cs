@@ -3,16 +3,27 @@ using System;
 
 namespace SManager.Core.Logger
 {
+    /// <summary>
+    /// The logger command.
+    /// </summary>
     public class LoggerCommand : ICommand
     {
         private string name;
         private bool isPrimed;
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <returns>A string.</returns>
         public string GetName()
         {
             return name;
         }
 
+        /// <summary>
+        /// Sets the name.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public void SetName(string value)
         {
             if (value != name)
@@ -27,8 +38,14 @@ namespace SManager.Core.Logger
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether is primed.
+        /// </summary>
         public bool IsPrimed { get => isPrimed; }
 
+        /// <summary>
+        /// Executes the.
+        /// </summary>
         public void Execute()
         {
             SManager.Core.Program core = new Program();
