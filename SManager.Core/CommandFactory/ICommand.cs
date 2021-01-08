@@ -1,17 +1,15 @@
-﻿namespace SManager.Core.CommandFactory
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SManager.Core.CommandFactory
 {
-    internal interface ICommand
+    public interface ICommand
     {
-        #region Public Properties
-
-        public string Name { get; }
-
-        #endregion Public Properties
-
-        #region Public Methods
+        string Name { get; set; }
 
         void Execute();
-
-        #endregion Public Methods
     }
 }

@@ -12,8 +12,10 @@ namespace SManager.Cli
             if (_args.Length <= 1) { }
             else
             {
-                _ = Console.ReadKey();
             }
+            var cmdLogger = Core.Program.bootstrapCommand("logger", "SManager.Cli");
+            cmdLogger.Execute();
+            _ = Console.ReadKey();
         }
 
         #endregion Private Methods

@@ -1,30 +1,16 @@
 ﻿using SManager.Core.CommandFactory;
+using System;
 
 namespace SManager.Core.Logger
 {
-    public class LoggerCommand : Command
+    public class LoggerCommand : ICommand
     {
-        #region Public Constructors
+        private string name;
+        public string Name { get => name; set => name = value; }
 
-        public LoggerCommand(Receiver _receiver) : base(_receiver, "Logger")
+        public void Execute()
         {
+            Logger.DoLog($"Some message from \"{Name}\" ..");
         }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public override string Name { get; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public override void Execute()
-        {
-            Receiver.Action();
-        }
-
-        #endregion Public Methods
     }
 }

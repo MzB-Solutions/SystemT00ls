@@ -1,13 +1,20 @@
-﻿namespace SManager.Core
+﻿using SManager.Core.CommandFactory;
+
+namespace SManager.Core
 {
+    public enum CommandSource
+    {
+        logger,
+        modules
+    }
+
     public class Program
     {
-        #region Public Constructors
-
-        public Program()
+        public static ICommand bootstrapCommand(string commandSource, string source)
         {
+            ICommand cmd = new Factory().GetCommand(commandSource);
+            cmd.Name = source;
+            return cmd;
         }
-
-        #endregion Public Constructors
     }
 }
