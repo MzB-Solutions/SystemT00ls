@@ -31,6 +31,8 @@ namespace SManager.Core.Logger
 
         public void Execute()
         {
+            SManager.Core.Program core = new Program();
+            string msg2 = core.SettingsJson;
             if (!IsPrimed)
             {
                 Console.WriteLine($"The LoggerCommand is NOT primed!!");
@@ -38,6 +40,7 @@ namespace SManager.Core.Logger
             else
             {
                 Logger.DoLog($"Some message from \"{GetName()}\" ..");
+                Logger.DoLog($"\"{GetName()}\": {msg2}");
             }
         }
     }
