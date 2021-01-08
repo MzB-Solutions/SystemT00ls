@@ -13,7 +13,7 @@ namespace SManager.Cli
             else
             {
             }
-            var cmdLogger = Core.Program.bootstrapCommand("logger", "SManager.Cli");
+            var cmdLogger = Core.Program.BootstrapCommand(Core.CommandSource.logger, "SManager.Cli");
             cmdLogger.Execute();
             _ = Console.ReadKey();
         }

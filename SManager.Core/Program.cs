@@ -10,10 +10,10 @@ namespace SManager.Core
 
     public class Program
     {
-        public static ICommand bootstrapCommand(string commandSource, string source)
+        public static ICommand BootstrapCommand(CommandSource cmdSource, string owner)
         {
-            ICommand cmd = new Factory().GetCommand(commandSource);
-            cmd.Name = source;
+            ICommand cmd = new Factory().GetCommand(cmdSource);
+            cmd.Name = owner;
             return cmd;
         }
     }
