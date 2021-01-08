@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SManager.Core
 {
@@ -51,7 +47,7 @@ namespace SManager.Core
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Settings"/> class.
+        /// Initializes a new instance of the <see cref="Settings" /> class.
         /// </summary>
         public Settings()
         {
