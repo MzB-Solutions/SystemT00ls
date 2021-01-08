@@ -13,7 +13,7 @@ namespace SManager.Core
         public static ICommand BootstrapCommand(CommandSource cmdSource, string owner)
         {
             ICommand cmd = new Factory().GetCommand(cmdSource);
-            cmd.Name = owner;
+            cmd.SetName(owner);
             return cmd;
         }
     }

@@ -8,7 +8,11 @@ namespace SManager.Core.CommandFactory
 {
     public interface ICommand
     {
-        string Name { get; set; }
+        string GetName();
+
+        void SetName(string value);
+
+        bool IsPrimed { get; }
 
         void Execute();
     }

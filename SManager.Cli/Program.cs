@@ -14,7 +14,15 @@ namespace SManager.Cli
             {
             }
             var cmdLogger = Core.Program.BootstrapCommand(Core.CommandSource.logger, "SManager.Cli");
-            cmdLogger.Execute();
+            if (cmdLogger.IsPrimed)
+            {
+                cmdLogger.Execute();
+            }
+            else
+            {
+                Console.WriteLine("The logger wasnt primed correctly");
+            }
+
             _ = Console.ReadKey();
         }
 
