@@ -1,31 +1,42 @@
-﻿using System;
+﻿/*
+Module Name:  IntTools.cs
+Project:             <Sample Name>
+Author:	           HOME\smzb
+Copyright (c) 2000-2021 MzB Solutions
+
+<Description of the file>
+
+This source is subject to the Unlicense.
+See https://github.com/MzB-Solutions/SManager/raw/master/LICENSE.
+All other rights reserved.
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 namespace SManager.Core
 {
+    using System;
+
     /// <summary>
-    /// A few simple tools for int handling (ensure its non-null etc)
+    /// A few simple tools for int handling (ensure its non-null etc).
     /// </summary>
     public static class IntTools
     {
-        #region Public Methods
-
         /// <summary>
-        /// Clamp an int down to a min and max value
+        /// Clamp an int down to a min and max value.
         /// </summary>
-        /// <remarks>Straight from https://stackoverflow.com/questions/3176602/how-to-force-a-number-to-be-in-a-range-in-c</remarks>
-        /// <typeparam name="T">The type of value handed in</typeparam>
-        /// <param name="value">The actual value of our (hopefullly) int</param>
-        /// <param name="min">The minimum value for the clamp operation</param>
-        /// <param name="max">The maximum value for the clamp operation</param>
-        /// <returns>
-        /// most likely an int-like type (preferably byte) that returns a clamped value, this should
-        /// NEVER return any zero-like value, EVER!
-        /// </returns>
+        /// <typeparam name="T">The type of value handed in.</typeparam>
+        /// <param name="value">The actual value of our (hopefullly) int.</param>
+        /// <param name="min">The minimum value for the clamp operation.</param>
+        /// <param name="max">The maximum value for the clamp operation.</param>
+        /// <returns>The <see cref="T" />.</returns>
         public static T Clamp<T>(T value, T min, T max) where T : notnull, IComparable<T>
         {
             if (min.CompareTo(max) > 0)
             {
-                throw new ArithmeticException("[min] Value cannot be greater than [max] Value");
+                throw new ArithmeticException($"[min] Value ({min}) cannot be greater than [max] Value ({max})");
             }
             if (value.CompareTo(min) < 0)
             {
@@ -39,7 +50,5 @@ namespace SManager.Core
 
             return value;
         }
-
-        #endregion Public Methods
     }
 }

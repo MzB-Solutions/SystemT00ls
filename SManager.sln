@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyConsole", "vendor\EasyC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SManager.Cli", "SManager.Cli\SManager.Cli.csproj", "{7E4FE03C-367F-46E8-9D60-2382B41BCB4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SManager.Gui", "SManager.Gui\SManager.Gui.csproj", "{348CF227-9FA6-4483-B5E5-E696C6C9E72D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,16 +43,12 @@ Global
 		{7E4FE03C-367F-46E8-9D60-2382B41BCB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E4FE03C-367F-46E8-9D60-2382B41BCB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E4FE03C-367F-46E8-9D60-2382B41BCB4A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{348CF227-9FA6-4483-B5E5-E696C6C9E72D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{348CF227-9FA6-4483-B5E5-E696C6C9E72D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{348CF227-9FA6-4483-B5E5-E696C6C9E72D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{348CF227-9FA6-4483-B5E5-E696C6C9E72D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {962F6BD8-DE44-4D9A-9F85-4B9408049B3B}
+		BuildVersion_StartDate = 2000/1/1
 	EndGlobalSection
 EndGlobal

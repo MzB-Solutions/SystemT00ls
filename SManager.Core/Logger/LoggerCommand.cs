@@ -1,14 +1,38 @@
-﻿using SManager.Core.CommandFactory;
-using System;
+﻿/*
+Module Name:  LoggerCommand.cs
+Project:             <Sample Name>
+Author:	           HOME\smzb
+Copyright (c) 2000-2021 MzB Solutions
+
+<Description of the file>
+
+This source is subject to the Unlicense.
+See https://github.com/MzB-Solutions/SManager/raw/master/LICENSE.
+All other rights reserved.
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 namespace SManager.Core.Logger
 {
+    using SManager.Core.CommandFactory;
+    using System;
+
     /// <summary>
     /// The logger command.
     /// </summary>
     public class LoggerCommand : ICommand
     {
+        /// <summary>
+        /// Defines the name.
+        /// </summary>
         private string name;
+
+        /// <summary>
+        /// Defines the isPrimed.
+        /// </summary>
         private bool isPrimed;
 
         /// <summary>
@@ -39,9 +63,25 @@ namespace SManager.Core.Logger
         }
 
         /// <summary>
-        /// Gets a value indicating whether is primed.
+        /// Gets a value indicating whether is primed..
         /// </summary>
         public bool IsPrimed { get => isPrimed; }
+
+        /// <summary>
+        /// Executes the.
+        /// </summary>
+        public void Execute(object data)
+        {
+            SManager.Core.Program core = new Program();
+            if (!IsPrimed)
+            {
+                Console.WriteLine($"The LoggerCommand is NOT primed!!");
+            }
+            else
+            {
+                Logger.DoLog($"\"{GetName()}\" ({DateTime.Now}): {data}");
+            }
+        }
 
         /// <summary>
         /// Executes the.
@@ -49,15 +89,13 @@ namespace SManager.Core.Logger
         public void Execute()
         {
             SManager.Core.Program core = new Program();
-            string msg2 = core.SettingsJson;
             if (!IsPrimed)
             {
                 Console.WriteLine($"The LoggerCommand is NOT primed!!");
             }
             else
             {
-                Logger.DoLog($"Some message from \"{GetName()}\" ..");
-                Logger.DoLog($"\"{GetName()}\": {msg2}");
+                Logger.DoLog($"\"{GetName()}\" ({DateTime.Now}): {core.SettingsJson}");
             }
         }
     }
