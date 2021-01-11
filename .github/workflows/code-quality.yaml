@@ -1,4 +1,4 @@
-name: Code Quality/Coverage
+name: Code Quality
 on:
   push:
     branches: [ master,dev ]
